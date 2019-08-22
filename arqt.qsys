@@ -6,7 +6,7 @@
    version="1.0"
    description=""
    tags=""
-   categories="" />
+   categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
    element LCD_0
@@ -15,6 +15,22 @@
       {
          value = "6";
          type = "int";
+      }
+   }
+   element VGA_0
+   {
+      datum _sortIndex
+      {
+         value = "7";
+         type = "int";
+      }
+   }
+   element arqt
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
       }
    }
    element buttons
@@ -119,7 +135,7 @@
  <parameter name="hideFromIPCatalog" value="false" />
  <parameter name="lockedInterfaceDefinition" value="" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="" />
+ <parameter name="projectName" value="Problema1.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="0" />
  <parameter name="testBenchDutName" value="" />
@@ -150,7 +166,32 @@
    type="conduit"
    dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <interface
+   name="vga_o_active"
+   internal="VGA_0.o_active"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="vga_o_animate"
+   internal="VGA_0.o_animate"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="vga_o_blanking"
+   internal="VGA_0.o_blanking"
+   type="conduit"
+   dir="end" />
+ <interface name="vga_o_hs" internal="VGA_0.o_hs" type="conduit" dir="end" />
+ <interface
+   name="vga_o_screenend"
+   internal="VGA_0.o_screenend"
+   type="conduit"
+   dir="end" />
+ <interface name="vga_o_vs" internal="VGA_0.o_vs" type="conduit" dir="end" />
+ <interface name="vga_o_x" internal="VGA_0.o_x" type="conduit" dir="end" />
+ <interface name="vga_o_y" internal="VGA_0.o_y" type="conduit" dir="end" />
  <module name="LCD_0" kind="LCD" version="1.0" enabled="1" />
+ <module name="VGA_0" kind="VGA" version="1.0" enabled="1" />
  <module name="buttons" kind="altera_avalon_pio" version="16.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -253,7 +294,7 @@
   <parameter name="cpuArchRev" value="1" />
   <parameter name="cpuID" value="0" />
   <parameter name="cpuReset" value="false" />
-  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="lcd_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
+  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="lcd_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="vga_0" baseAddress="1" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
   <parameter name="customInstSlavesSystemInfo_nios_a" value="&lt;info/&gt;" />
   <parameter name="customInstSlavesSystemInfo_nios_b" value="&lt;info/&gt;" />
   <parameter name="customInstSlavesSystemInfo_nios_c" value="&lt;info/&gt;" />
@@ -528,6 +569,15 @@
   <parameter name="CIName" value="lcd_0" />
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0" />
+ </connection>
+ <connection
+   kind="nios_custom_instruction"
+   version="16.1"
+   start="nios2_gen2_0.custom_instruction_master"
+   end="VGA_0.nios_custom_instruction_slave">
+  <parameter name="CIName" value="vga_0" />
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="1" />
  </connection>
  <connection
    kind="reset"
