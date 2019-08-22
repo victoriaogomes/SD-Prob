@@ -1,6 +1,4 @@
 // Driver VGA 800x600 50Hz
-`default_nettype none
-
 module vga800x600(
     input wire i_clk,           // Clock base (vindo da placa)
     input wire i_rst,           // Reset: recomeça a imprimir o quadro

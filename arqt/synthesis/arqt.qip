@@ -2,7 +2,7 @@ set_global_assignment -entity "arqt" -library "arqt" -name IP_TOOL_NAME "Qsys"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_TOOL_VERSION "16.1"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "arqt" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../arqt.sopcinfo"]
-set_global_assignment -entity "arqt" -library "arqt" -name SLD_INFO "QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1565892265"
+set_global_assignment -entity "arqt" -library "arqt" -name SLD_INFO "QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1566489472"
 set_global_assignment -library "arqt" -name MISC_FILE [file join $::quartus(qip_path) "../arqt.cmp"]
 set_global_assignment -library "arqt" -name SLD_FILE [file join $::quartus(qip_path) "arqt.regmap"]
 set_global_assignment -library "arqt" -name SLD_FILE [file join $::quartus(qip_path) "arqt.debuginfo"]
@@ -16,7 +16,7 @@ set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_DISPLAY_
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_REPORT_HIERARCHY "On"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTU2NTg5MjI2NQ==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTU2NjQ4OTQ3Mg==::QXV0byBHRU5FUkFUSU9OX0lE"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBJViBF::QXV0byBERVZJQ0VfRkFNSUxZ"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::RVA0Q0U2RTIyQzg=::QXV0byBERVZJQ0U="
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::OA==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
@@ -966,11 +966,11 @@ set_global_assignment -entity "arqt_buttons" -library "arqt" -name IP_COMPONENT_
 set_global_assignment -entity "arqt_buttons" -library "arqt" -name IP_COMPONENT_PARAMETER "ZGVyaXZlZF9lZGdlX3R5cGU=::Tk9ORQ==::ZGVyaXZlZF9lZGdlX3R5cGU="
 set_global_assignment -entity "arqt_buttons" -library "arqt" -name IP_COMPONENT_PARAMETER "ZGVyaXZlZF9pcnFfdHlwZQ==::Tk9ORQ==::ZGVyaXZlZF9pcnFfdHlwZQ=="
 set_global_assignment -entity "arqt_buttons" -library "arqt" -name IP_COMPONENT_PARAMETER "ZGVyaXZlZF9oYXNfaXJx::ZmFsc2U=::ZGVyaXZlZF9oYXNfaXJx"
-set_global_assignment -entity "vga800x600" -library "arqt" -name IP_COMPONENT_NAME "dmdhODAweDYwMA=="
-set_global_assignment -entity "vga800x600" -library "arqt" -name IP_COMPONENT_DISPLAY_NAME "VkdB"
-set_global_assignment -entity "vga800x600" -library "arqt" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
-set_global_assignment -entity "vga800x600" -library "arqt" -name IP_COMPONENT_INTERNAL "Off"
-set_global_assignment -entity "vga800x600" -library "arqt" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "top" -library "arqt" -name IP_COMPONENT_NAME "dG9w"
+set_global_assignment -entity "top" -library "arqt" -name IP_COMPONENT_DISPLAY_NAME "VkdB"
+set_global_assignment -entity "top" -library "arqt" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
+set_global_assignment -entity "top" -library "arqt" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "top" -library "arqt" -name IP_COMPONENT_VERSION "MS4w"
 set_global_assignment -entity "lcd" -library "arqt" -name IP_COMPONENT_NAME "bGNk"
 set_global_assignment -entity "lcd" -library "arqt" -name IP_COMPONENT_DISPLAY_NAME "TENE"
 set_global_assignment -entity "lcd" -library "arqt" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
@@ -1015,7 +1015,9 @@ set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(q
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_leds.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_jtag_uart_0.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_buttons.v"]
+set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/printBar.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/vga800x600.v"]
+set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/top.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/lcd.v"]
 
 set_global_assignment -entity "altera_reset_controller" -library "arqt" -name IP_TOOL_NAME "altera_reset_controller"
