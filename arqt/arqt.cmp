@@ -8,10 +8,10 @@
 			lcd_rw_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
 			leds_export                     : out std_logic_vector(3 downto 0);                    -- export
 			reset_reset_n                   : in  std_logic                    := 'X';             -- reset_n
-			vga_b_readdata                  : out std_logic_vector(3 downto 0);                    -- readdata
-			vga_g_readdata                  : out std_logic_vector(3 downto 0);                    -- readdata
+			vga_b_readdata                  : out std_logic;                                       -- readdata
+			vga_g_readdata                  : out std_logic;                                       -- readdata
 			vga_hs_o_writeresponsevalid_n   : out std_logic;                                       -- writeresponsevalid_n
-			vga_r_readdata                  : out std_logic_vector(3 downto 0);                    -- readdata
+			vga_r_readdata                  : out std_logic;                                       -- readdata
 			vga_vs_o_writeresponsevalid_n   : out std_logic                                        -- writeresponsevalid_n
 		);
 	end component arqt;

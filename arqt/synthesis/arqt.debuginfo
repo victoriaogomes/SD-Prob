@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="arqt" kind="system" version="16.1" fabric="QSYS">
  <!-- Format version 16.1 203 (Future versions may contain additional information.) -->
- <!-- 2019.08.22.12:58:35 -->
+ <!-- 2019.08.23.12:47:03 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1566489472</value>
+  <value>1566575208</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -635,7 +635,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>VGA_B</name>
     <direction>Output</direction>
-    <width>4</width>
+    <width>1</width>
     <role>readdata</role>
    </port>
   </interface>
@@ -680,7 +680,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>VGA_G</name>
     <direction>Output</direction>
-    <width>4</width>
+    <width>1</width>
     <role>readdata</role>
    </port>
   </interface>
@@ -725,7 +725,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>VGA_R</name>
     <direction>Output</direction>
-    <width>4</width>
+    <width>1</width>
     <role>readdata</role>
    </port>
   </interface>
@@ -15001,5 +15001,5 @@ parameters are a RESULT of the module parameters. -->
   <version>16.1</version>
  </plugin>
  <reportVersion>16.1 203</reportVersion>
- <uniqueIdentifier>641C67890D3D0000016CBA0C8C64</uniqueIdentifier>
+ <uniqueIdentifier>7640BBF352C10000016CBF28B289</uniqueIdentifier>
 </EnsembleReport>

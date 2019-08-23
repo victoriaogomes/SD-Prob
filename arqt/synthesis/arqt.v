@@ -12,10 +12,10 @@ module arqt (
 		output wire       lcd_rw_writeresponsevalid_n,     //      lcd_rw.writeresponsevalid_n
 		output wire [3:0] leds_export,                     //        leds.export
 		input  wire       reset_reset_n,                   //       reset.reset_n
-		output wire [3:0] vga_b_readdata,                  //       vga_b.readdata
-		output wire [3:0] vga_g_readdata,                  //       vga_g.readdata
+		output wire       vga_b_readdata,                  //       vga_b.readdata
+		output wire       vga_g_readdata,                  //       vga_g.readdata
 		output wire       vga_hs_o_writeresponsevalid_n,   //    vga_hs_o.writeresponsevalid_n
-		output wire [3:0] vga_r_readdata,                  //       vga_r.readdata
+		output wire       vga_r_readdata,                  //       vga_r.readdata
 		output wire       vga_vs_o_writeresponsevalid_n    //    vga_vs_o.writeresponsevalid_n
 	);
 

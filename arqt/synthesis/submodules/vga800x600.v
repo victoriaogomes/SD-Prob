@@ -30,8 +30,8 @@ module vga800x600(
     assign o_vs = ((v_count >= VS_STA) & (v_count < VS_END));
 
     // Mantenho x e y travados dentro dos pixeis ativos
-    assign o_x = (h_count < HA_STA) ? 0 : (h_count - HA_STA);
-    assign o_y = (v_count >= VA_END) ? (VA_END - 1) : (v_count);
+    assign o_x = (h_count < HA_STA) ? {11{1'b0}} : (h_count - HA_STA);
+    assign o_y = (v_count >= VA_END) ? (VA_END - 1'd1) : (v_count);
 
     // Blanking: alto no período de piscar
     assign o_blanking = ((h_count < HA_STA) | (v_count > VA_END - 1));
@@ -57,14 +57,14 @@ module vga800x600(
             if (h_count == LINE)  // Se for o final da linha
             begin
                 h_count <= 0;//Zero meu contador
-                v_count <= v_count + 1;//Vou para a outra linha
+                v_count <= v_count + 1'b1;//Vou para a outra linha
             end
             else
-                h_count <= h_count + 1;//Senão, continuo nessa linha
+                h_count <= h_count + 1'b1;//Senão, continuo nessa linha
 
             if (v_count == SCREEN)  // Se for o final da tela
             begin
-                v_count <= 0;//Zero meu contador
+                v_count <= 0; //Zero meu contador
             end
             else
               begin

@@ -83,16 +83,16 @@ agreement for further details.
 	(port
 		(pt 0 392)
 		(output)
-		(text "vga_b_readdata[3..0]" (rect 0 0 86 12)(font "Arial" (font_size 8)))
-		(text "vga_b_readdata[3..0]" (rect 4 381 124 392)(font "Arial" (font_size 8)))
-		(line (pt 0 392)(pt 176 392)(line_width 3))
+		(text "vga_b_readdata" (rect 0 0 66 12)(font "Arial" (font_size 8)))
+		(text "vga_b_readdata" (rect 4 381 88 392)(font "Arial" (font_size 8)))
+		(line (pt 0 392)(pt 176 392)(line_width 1))
 	)
 	(port
 		(pt 0 432)
 		(output)
-		(text "vga_g_readdata[3..0]" (rect 0 0 86 12)(font "Arial" (font_size 8)))
-		(text "vga_g_readdata[3..0]" (rect 4 421 124 432)(font "Arial" (font_size 8)))
-		(line (pt 0 432)(pt 176 432)(line_width 3))
+		(text "vga_g_readdata" (rect 0 0 66 12)(font "Arial" (font_size 8)))
+		(text "vga_g_readdata" (rect 4 421 88 432)(font "Arial" (font_size 8)))
+		(line (pt 0 432)(pt 176 432)(line_width 1))
 	)
 	(port
 		(pt 0 472)
@@ -104,9 +104,9 @@ agreement for further details.
 	(port
 		(pt 0 512)
 		(output)
-		(text "vga_r_readdata[3..0]" (rect 0 0 84 12)(font "Arial" (font_size 8)))
-		(text "vga_r_readdata[3..0]" (rect 4 501 124 512)(font "Arial" (font_size 8)))
-		(line (pt 0 512)(pt 176 512)(line_width 3))
+		(text "vga_r_readdata" (rect 0 0 64 12)(font "Arial" (font_size 8)))
+		(text "vga_r_readdata" (rect 4 501 88 512)(font "Arial" (font_size 8)))
+		(line (pt 0 512)(pt 176 512)(line_width 1))
 	)
 	(port
 		(pt 0 552)

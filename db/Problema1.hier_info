@@ -8,6 +8,9 @@ buttons[3] => arqt:arq.buttons_export[3]
 lcd_rs <= arqt:arq.lcd_rs_writeresponsevalid_n
 VGA_HS <= arqt:arq.vga_hs_o_writeresponsevalid_n
 VGA_VS <= arqt:arq.vga_vs_o_writeresponsevalid_n
+VGA_B <= arqt:arq.vga_b_readdata
+VGA_G <= arqt:arq.vga_g_readdata
+VGA_R <= arqt:arq.vga_r_readdata
 display[0] <= arqt:arq.lcd_display_readdata[0]
 display[1] <= arqt:arq.lcd_display_readdata[1]
 display[2] <= arqt:arq.lcd_display_readdata[2]
@@ -20,18 +23,6 @@ leds[0] <= arqt:arq.leds_export[0]
 leds[1] <= arqt:arq.leds_export[1]
 leds[2] <= arqt:arq.leds_export[2]
 leds[3] <= arqt:arq.leds_export[3]
-VGA_B[0] <= arqt:arq.vga_b_readdata[0]
-VGA_B[1] <= arqt:arq.vga_b_readdata[1]
-VGA_B[2] <= arqt:arq.vga_b_readdata[2]
-VGA_B[3] <= arqt:arq.vga_b_readdata[3]
-VGA_G[0] <= arqt:arq.vga_g_readdata[0]
-VGA_G[1] <= arqt:arq.vga_g_readdata[1]
-VGA_G[2] <= arqt:arq.vga_g_readdata[2]
-VGA_G[3] <= arqt:arq.vga_g_readdata[3]
-VGA_R[0] <= arqt:arq.vga_r_readdata[0]
-VGA_R[1] <= arqt:arq.vga_r_readdata[1]
-VGA_R[2] <= arqt:arq.vga_r_readdata[2]
-VGA_R[3] <= arqt:arq.vga_r_readdata[3]
 
 
 |problema1|arqt:arq
@@ -56,19 +47,10 @@ leds_export[1] <= arqt_leds:leds.out_port
 leds_export[2] <= arqt_leds:leds.out_port
 leds_export[3] <= arqt_leds:leds.out_port
 reset_reset_n => _.IN1
-vga_b_readdata[0] <= top:vga_0.VGA_B
-vga_b_readdata[1] <= top:vga_0.VGA_B
-vga_b_readdata[2] <= top:vga_0.VGA_B
-vga_b_readdata[3] <= top:vga_0.VGA_B
-vga_g_readdata[0] <= top:vga_0.VGA_G
-vga_g_readdata[1] <= top:vga_0.VGA_G
-vga_g_readdata[2] <= top:vga_0.VGA_G
-vga_g_readdata[3] <= top:vga_0.VGA_G
+vga_b_readdata <= top:vga_0.VGA_B
+vga_g_readdata <= top:vga_0.VGA_G
 vga_hs_o_writeresponsevalid_n <= top:vga_0.VGA_HS_O
-vga_r_readdata[0] <= top:vga_0.VGA_R
-vga_r_readdata[1] <= top:vga_0.VGA_R
-vga_r_readdata[2] <= top:vga_0.VGA_R
-vga_r_readdata[3] <= top:vga_0.VGA_R
+vga_r_readdata <= top:vga_0.VGA_R
 vga_vs_o_writeresponsevalid_n <= top:vga_0.VGA_VS_O
 
 
@@ -239,18 +221,9 @@ dataa[31] => ~NO_FANOUT~
 RST_BTN => rst.IN3
 VGA_HS_O <= vga800x600:display.o_hs
 VGA_VS_O <= vga800x600:display.o_vs
-VGA_R[0] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_R[1] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_R[2] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_R[3] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_G[0] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_G[1] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_G[2] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_G[3] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_B[0] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_B[1] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_B[2] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
-VGA_B[3] <= selectColor.DB_MAX_OUTPUT_PORT_TYPE
+VGA_R <= aux.DB_MAX_OUTPUT_PORT_TYPE
+VGA_G <= aux.DB_MAX_OUTPUT_PORT_TYPE
+VGA_B <= aux.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |problema1|arqt:arq|top:vga_0|vga800x600:display

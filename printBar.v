@@ -29,21 +29,21 @@ always @(posedge clk_in) begin                                     // A cada pul
             if(delay == 20'hFFFFF) begin                           // Verifica se o delay já chegou ao final
                 if(!cor) begin                                     // Caso não esteja escrevendo na tela
                     startDelay <= 0;                               // Seta variável para finalizar delay
-                    delay <= 0;                                   
+                    delay <= 0;
                     y_barra <= y_barraAux;                         // Atualiza valor de Y
                 end
             end
-            else delay <= delay + 1;
+            else delay <= delay + 1'b1;
         end
-    end    
+    end
 end
 
 
 always @(posedge clk_in) begin                                     // A cada pulso de clock
-    color <= cor;                                                  // O valor do fio 'cor' é armazenado no registrador 'color' 
+    color <= cor;                                                  // O valor do fio 'cor' é armazenado no registrador 'color'
 end
 
-always @(*) begin                      
+always @(*) begin
     if(o_active) begin                                             // Caso esteja na área ativa
         if(o_x >= x_barra && o_x <= (x_barra+tamBarraX)) begin     // Verifica se está na posição x da barra 1 para desenhá-la
             if(o_y >= y_barra && o_y <= (y_barra+tamBarraY))       // Verifica se está na posição y da barra 1 para desenhá-la
