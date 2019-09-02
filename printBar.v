@@ -1,22 +1,22 @@
-module printBar #(parameter y_barraInicial = 285, x_barra = 10)(
+module printBar #(parameter y_barraInicial = 240, x_barra = 10)(
     input wire clk_in,                                             // Clock base (vindo da placa)
     input wire clk_en,                                             // Clock para habilitar a instrução customizada
     input wire i_rst,                                              // Reset: recomeça a imprimir o quadro
     input wire o_active,                                           // Alto quando um pixel está sendo desenhado
-    input wire [10:0] o_x,                                         // Posição x atual do pixel
-    input wire [9:0] o_y,                                          // Posição y atual do pixel
-    input wire [9:0] coordY,                                       // Coordenada para impressão em y
+    input wire [9:0] o_x,                                         // Posição x atual do pixel
+    input wire [8:0] o_y,                                          // Posição y atual do pixel
+    input wire [8:0] coordY,                                       // Coordenada para impressão em y
     output reg color                                               // Indica se está imprimindo ou não (1 imprimindo, 0 não)
 );
 
 // Barra: 10x30
 // Bolinha: 10x10
-reg [9:0] y_barra = y_barraInicial;                                // Tamanho da barra 1 e 2
-reg [9:0] y_barraAux;                                              // Auxiliar para armazenar novo valor de Y até fim do delay
+reg [8:0] y_barra = y_barraInicial;                                // Tamanho da barra 1 e 2
+reg [8:0] y_barraAux;                                              // Auxiliar para armazenar novo valor de Y até fim do delay
 reg [19:0] delay = 0;                                              // Tempo que deve ser esperado até atualizar as coordenadas
 reg startDelay = 0;                                                // Sinal que indica se o delay deve ser iniciado
 localparam tamBarraX = 10,                                         // Tamanho da barra no eixo x
-           tamBarraY = 30;                                         // Tamanho da barra no eixo y
+           tamBarraY = 60;                                         // Tamanho da barra no eixo y
 reg cor;                                                           // Fio auxiliar para manipular o valor do registrador color
 
 always @(posedge clk_in) begin                                     // A cada pulso de clock

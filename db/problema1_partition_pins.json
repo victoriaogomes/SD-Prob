@@ -24,10 +24,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G",
-					"strict" : false
-				},
-				{
 					"name" : "VGA_R",
 					"strict" : false
 				},
@@ -64,22 +60,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "leds[3]",
-					"strict" : false
-				},
-				{
-					"name" : "leds[2]",
-					"strict" : false
-				},
-				{
-					"name" : "leds[1]",
-					"strict" : false
-				},
-				{
-					"name" : "leds[0]",
-					"strict" : false
-				},
-				{
 					"name" : "clk",
 					"strict" : false
 				},
@@ -97,6 +77,10 @@
 				},
 				{
 					"name" : "buttons[3]",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
 					"strict" : false
 				},
 				{

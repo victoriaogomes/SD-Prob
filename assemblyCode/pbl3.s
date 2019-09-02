@@ -17,6 +17,9 @@
 _start:
 	movia r2, switches # Move para r2 o endereço dos switches
 	movia r3, leds # Move para r3 o endereço dos leds
+	movia r17, 0xc8
+	movia r16, 0x0
+	custom 1, r23, r17, r16
 	call turn_led_off # Chama a função que desligará todos os leds
 	call set_constants # Chama a função que seta as constantes para os delays utilizados
 	call initialize_lcd # Chama a função que inicializa o LCD
@@ -28,7 +31,7 @@ score:
 	movia r15, 0xB # Usa o registrador r15 para carregar os valores que serão comparados para branch
 	beq r4, r15, add_score_player_2 # Caso o botão de descer a seleção seja selecionado, dá branch para atualizar placar
 	addi r22, r22, 1
-	b score
+	call score
 
 set_constants:
 	movia r11, 0x0 # r11 -> contador, inicializado como 0
@@ -232,11 +235,11 @@ ret
 write_score:
 	addi r27, r27, -4 # Aloca espaço na pilha
 	stw r31, 0(r27) # Salva na pilha o endereço para o qual deverá voltar após executar os procedimetos seguintes
-	movia r16, r21 # Placar do jogador 1
+	mov r16, r21 # Placar do jogador 1
 	call write # Escreve o valor armazenado no registrador de r16
 	movia r16, 0x58 # Caractere X
 	call write # Escreve o valor armazenado no registrador de r16
-	movia r16, r22 # Placar do jogador 2
+	mov r16, r22 # Placar do jogador 2
 	call write # Escreve o valor armazenado no registrador de r16
 	ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
 	addi r27, r27, 4 # Desalocando espaço na pilha
