@@ -913,8 +913,8 @@ wreq => cntr_1ob:wr_ptr.cnt_en
 |problema1|arqt:inst2|arqt_jtag_uart_0:jtag_uart_0|arqt_jtag_uart_0_scfifo_w:the_arqt_jtag_uart_0_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_l011:dpfifo|a_fefifo_7cf:fifo_state
 aclr => b_full.IN0
 aclr => b_non_empty.IN0
-aclr => cntr_vg7:count_usedw.aclr
-clock => cntr_vg7:count_usedw.clock
+aclr => cntr_do7:count_usedw.aclr
+clock => cntr_do7:count_usedw.clock
 clock => b_full.CLK
 clock => b_non_empty.CLK
 empty <= empty.DB_MAX_OUTPUT_PORT_TYPE
@@ -928,7 +928,7 @@ sclr => _.IN0
 sclr => _.IN1
 sclr => _.IN0
 sclr => _.IN0
-sclr => cntr_vg7:count_usedw.sclr
+sclr => cntr_do7:count_usedw.sclr
 usedw_out[0] <= usedw[0].DB_MAX_OUTPUT_PORT_TYPE
 usedw_out[1] <= usedw[1].DB_MAX_OUTPUT_PORT_TYPE
 usedw_out[2] <= usedw[2].DB_MAX_OUTPUT_PORT_TYPE
@@ -939,10 +939,10 @@ wreq => _.IN1
 wreq => _.IN1
 wreq => _.IN0
 wreq => _.IN0
-wreq => cntr_vg7:count_usedw.updown
+wreq => cntr_do7:count_usedw.updown
 
 
-|problema1|arqt:inst2|arqt_jtag_uart_0:jtag_uart_0|arqt_jtag_uart_0_scfifo_w:the_arqt_jtag_uart_0_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_l011:dpfifo|a_fefifo_7cf:fifo_state|cntr_vg7:count_usedw
+|problema1|arqt:inst2|arqt_jtag_uart_0:jtag_uart_0|arqt_jtag_uart_0_scfifo_w:the_arqt_jtag_uart_0_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_l011:dpfifo|a_fefifo_7cf:fifo_state|cntr_do7:count_usedw
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -1311,8 +1311,8 @@ wreq => cntr_1ob:wr_ptr.cnt_en
 |problema1|arqt:inst2|arqt_jtag_uart_0:jtag_uart_0|arqt_jtag_uart_0_scfifo_r:the_arqt_jtag_uart_0_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_l011:dpfifo|a_fefifo_7cf:fifo_state
 aclr => b_full.IN0
 aclr => b_non_empty.IN0
-aclr => cntr_vg7:count_usedw.aclr
-clock => cntr_vg7:count_usedw.clock
+aclr => cntr_do7:count_usedw.aclr
+clock => cntr_do7:count_usedw.clock
 clock => b_full.CLK
 clock => b_non_empty.CLK
 empty <= empty.DB_MAX_OUTPUT_PORT_TYPE
@@ -1326,7 +1326,7 @@ sclr => _.IN0
 sclr => _.IN1
 sclr => _.IN0
 sclr => _.IN0
-sclr => cntr_vg7:count_usedw.sclr
+sclr => cntr_do7:count_usedw.sclr
 usedw_out[0] <= usedw[0].DB_MAX_OUTPUT_PORT_TYPE
 usedw_out[1] <= usedw[1].DB_MAX_OUTPUT_PORT_TYPE
 usedw_out[2] <= usedw[2].DB_MAX_OUTPUT_PORT_TYPE
@@ -1337,10 +1337,10 @@ wreq => _.IN1
 wreq => _.IN1
 wreq => _.IN0
 wreq => _.IN0
-wreq => cntr_vg7:count_usedw.updown
+wreq => cntr_do7:count_usedw.updown
 
 
-|problema1|arqt:inst2|arqt_jtag_uart_0:jtag_uart_0|arqt_jtag_uart_0_scfifo_r:the_arqt_jtag_uart_0_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_l011:dpfifo|a_fefifo_7cf:fifo_state|cntr_vg7:count_usedw
+|problema1|arqt:inst2|arqt_jtag_uart_0:jtag_uart_0|arqt_jtag_uart_0_scfifo_r:the_arqt_jtag_uart_0_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_l011:dpfifo|a_fefifo_7cf:fifo_state|cntr_do7:count_usedw
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK

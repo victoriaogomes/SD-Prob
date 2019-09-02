@@ -2,9 +2,9 @@
     <architecture>Nios II</architecture>
     <system>
         <system_info filepath="true">../arqt.sopcinfo</system_info>
-        <system_sof filepath="true">../problema1.sof</system_sof>
+        <system_sof filepath="true">../output_files/Problema1.sof</system_sof>
         <system_jdi filepath="true"/>
-        <cable>USB-Blaster [3-7]</cable>
+        <cable>USB-Blaster [USB-0]</cable>
         <processor>nios2_gen2_0</processor>
         <reset_processor_during_load>false</reset_processor_during_load>
         <terminal>jtag_uart_0</terminal>

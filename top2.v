@@ -60,6 +60,17 @@ module top2(
       .color(selectColor2)      // Saída para indicar a cor do que deve ser escrito
     );
 
+    printBall #(.IX(160), .IY(120), .H_SIZE(60)) sq_a_anim (
+        .i_clk(CLK), 
+        .i_ani_stb(pix_stb),
+        .i_rst(rst),
+        .i_animate(animate),
+        .o_x1(sq_a_x1),
+        .o_x2(sq_a_x2),
+        .o_y1(sq_a_y1),
+        .o_y2(sq_a_y2)
+    );   
+
 
 
     always @(posedge CLK_EN) begin
