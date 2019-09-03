@@ -4,18 +4,18 @@
 
 `timescale 1 ps / 1 ps
 module arqt (
-		input  wire [3:0] buttons_export,                  //     buttons.export
-		input  wire       clk_clk,                         //         clk.clk
-		output wire [7:0] lcd_display_readdata,            // lcd_display.readdata
-		output wire       lcd_enable_writeresponsevalid_n, //  lcd_enable.writeresponsevalid_n
-		output wire       lcd_rs_writeresponsevalid_n,     //      lcd_rs.writeresponsevalid_n
-		output wire       lcd_rw_writeresponsevalid_n,     //      lcd_rw.writeresponsevalid_n
-		input  wire       reset_reset_n,                   //       reset.reset_n
-		output wire       vga_b_readdata,                  //       vga_b.readdata
-		output wire       vga_g_readdata,                  //       vga_g.readdata
-		output wire       vga_hs_o_writeresponsevalid_n,   //    vga_hs_o.writeresponsevalid_n
-		output wire       vga_r_readdata,                  //       vga_r.readdata
-		output wire       vga_vs_o_writeresponsevalid_n    //    vga_vs_o.writeresponsevalid_n
+		input  wire [3:0] buttons_export,              // buttons.export
+		input  wire       clk_clk,                     //     clk.clk
+		output wire [7:0] display_readdata,            // display.readdata
+		output wire       en_writeresponsevalid_n,     //      en.writeresponsevalid_n
+		input  wire       reset_reset_n,               //   reset.reset_n
+		output wire       rs_writeresponsevalid_n,     //      rs.writeresponsevalid_n
+		output wire       rw_writeresponsevalid_n,     //      rw.writeresponsevalid_n
+		output wire       vga_b_writeresponsevalid_n,  //   vga_b.writeresponsevalid_n
+		output wire       vga_g_writeresponsevalid_n,  //   vga_g.writeresponsevalid_n
+		output wire       vga_hs_writeresponsevalid_n, //  vga_hs.writeresponsevalid_n
+		output wire       vga_r_writeresponsevalid_n,  //   vga_r.writeresponsevalid_n
+		output wire       vga_vs_writeresponsevalid_n  //  vga_vs.writeresponsevalid_n
 	);
 
 	wire         nios2_gen2_0_custom_instruction_master_readra;                                   // nios2_gen2_0:D_ci_readra -> nios2_gen2_0_custom_instruction_master_translator:ci_slave_readra
@@ -92,6 +92,7 @@ module arqt (
 	wire  [31:0] nios2_gen2_0_custom_instruction_master_multi_xconnect_ci_master1_dataa;          // nios2_gen2_0_custom_instruction_master_multi_xconnect:ci_master1_dataa -> nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_slave_dataa
 	wire         nios2_gen2_0_custom_instruction_master_multi_xconnect_ci_master1_reset;          // nios2_gen2_0_custom_instruction_master_multi_xconnect:ci_master1_reset -> nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_slave_reset
 	wire         nios2_gen2_0_custom_instruction_master_multi_xconnect_ci_master1_writerc;        // nios2_gen2_0_custom_instruction_master_multi_xconnect:ci_master1_writerc -> nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_slave_writerc
+	wire  [31:0] nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_result; // VGA_0:result -> nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_master_result
 	wire         nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk;    // nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_master_clk -> VGA_0:CLK
 	wire         nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk_en; // nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_master_clken -> VGA_0:CLK_EN
 	wire  [31:0] nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_dataa;  // nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_master_dataa -> VGA_0:dataa
@@ -138,26 +139,27 @@ module arqt (
 	wire         rst_controller_reset_out_reset_req;                                              // rst_controller:reset_req -> [memoria:reset_req, nios2_gen2_0:reset_req, rst_translator:reset_req_in]
 
 	lcd lcd_0 (
-		.rw      (lcd_rw_writeresponsevalid_n),                                                     //                        lcd_rw.writeresponsevalid_n
-		.rs      (lcd_rs_writeresponsevalid_n),                                                     //                        lcd_rs.writeresponsevalid_n
-		.en      (lcd_enable_writeresponsevalid_n),                                                 //                    lcd_enable.writeresponsevalid_n
-		.display (lcd_display_readdata),                                                            //                   lcd_display.readdata
 		.dataa   (nios2_gen2_0_custom_instruction_master_multi_slave_translator0_ci_master_dataa),  // nios_custom_instruction_slave.dataa
 		.datab   (nios2_gen2_0_custom_instruction_master_multi_slave_translator0_ci_master_datab),  //                              .datab
 		.clk     (nios2_gen2_0_custom_instruction_master_multi_slave_translator0_ci_master_clk),    //                              .clk
-		.clk_en  (nios2_gen2_0_custom_instruction_master_multi_slave_translator0_ci_master_clk_en)  //                              .clk_en
+		.clk_en  (nios2_gen2_0_custom_instruction_master_multi_slave_translator0_ci_master_clk_en), //                              .clk_en
+		.rw      (rw_writeresponsevalid_n),                                                         //                            rw.writeresponsevalid_n
+		.rs      (rs_writeresponsevalid_n),                                                         //                            rs.writeresponsevalid_n
+		.en      (en_writeresponsevalid_n),                                                         //                            en.writeresponsevalid_n
+		.display (display_readdata)                                                                 //                       display.readdata
 	);
 
 	top2 vga_0 (
-		.RST_BTN  (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_reset),  // nios_custom_instruction_slave.reset
-		.CLK      (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk),    //                              .clk
-		.dataa    (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_dataa),  //                              .dataa
+		.CLK      (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk),    // nios_custom_instruction_slave.clk
 		.CLK_EN   (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk_en), //                              .clk_en
-		.VGA_B    (vga_b_readdata),                                                                  //                         VGA_B.readdata
-		.VGA_G    (vga_g_readdata),                                                                  //                         VGA_G.readdata
-		.VGA_R    (vga_r_readdata),                                                                  //                         VGA_R.readdata
-		.VGA_VS_O (vga_vs_o_writeresponsevalid_n),                                                   //                      VGA_VS_O.writeresponsevalid_n
-		.VGA_HS_O (vga_hs_o_writeresponsevalid_n)                                                    //                      VGA_HS_O.writeresponsevalid_n
+		.dataa    (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_dataa),  //                              .dataa
+		.RST_BTN  (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_reset),  //                              .reset
+		.result   (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_result), //                              .result
+		.VGA_HS_O (vga_hs_writeresponsevalid_n),                                                     //                        VGA_HS.writeresponsevalid_n
+		.VGA_VS_O (vga_vs_writeresponsevalid_n),                                                     //                        VGA_VS.writeresponsevalid_n
+		.VGA_R    (vga_r_writeresponsevalid_n),                                                      //                         VGA_R.writeresponsevalid_n
+		.VGA_G    (vga_g_writeresponsevalid_n),                                                      //                         VGA_G.writeresponsevalid_n
+		.VGA_B    (vga_b_writeresponsevalid_n)                                                       //                         VGA_B.writeresponsevalid_n
 	);
 
 	arqt_buttons buttons (
@@ -426,7 +428,7 @@ module arqt (
 		.ci_slave_start      (nios2_gen2_0_custom_instruction_master_multi_xconnect_ci_master1_start),          //          .start
 		.ci_slave_done       (nios2_gen2_0_custom_instruction_master_multi_xconnect_ci_master1_done),           //          .done
 		.ci_master_dataa     (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_dataa),  // ci_master.dataa
-		.ci_master_result    (),                                                                                //          .result
+		.ci_master_result    (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_result), //          .result
 		.ci_master_clk       (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk),    //          .clk
 		.ci_master_clken     (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_clk_en), //          .clk_en
 		.ci_master_reset     (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_reset),  //          .reset

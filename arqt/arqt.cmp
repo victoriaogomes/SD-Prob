@@ -1,17 +1,17 @@
 	component arqt is
 		port (
-			buttons_export                  : in  std_logic_vector(3 downto 0) := (others => 'X'); -- export
-			clk_clk                         : in  std_logic                    := 'X';             -- clk
-			lcd_display_readdata            : out std_logic_vector(7 downto 0);                    -- readdata
-			lcd_enable_writeresponsevalid_n : out std_logic;                                       -- writeresponsevalid_n
-			lcd_rs_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
-			lcd_rw_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
-			reset_reset_n                   : in  std_logic                    := 'X';             -- reset_n
-			vga_b_readdata                  : out std_logic;                                       -- readdata
-			vga_g_readdata                  : out std_logic;                                       -- readdata
-			vga_hs_o_writeresponsevalid_n   : out std_logic;                                       -- writeresponsevalid_n
-			vga_r_readdata                  : out std_logic;                                       -- readdata
-			vga_vs_o_writeresponsevalid_n   : out std_logic                                        -- writeresponsevalid_n
+			buttons_export              : in  std_logic_vector(3 downto 0) := (others => 'X'); -- export
+			clk_clk                     : in  std_logic                    := 'X';             -- clk
+			display_readdata            : out std_logic_vector(7 downto 0);                    -- readdata
+			en_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
+			reset_reset_n               : in  std_logic                    := 'X';             -- reset_n
+			rs_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
+			rw_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
+			vga_b_writeresponsevalid_n  : out std_logic;                                       -- writeresponsevalid_n
+			vga_g_writeresponsevalid_n  : out std_logic;                                       -- writeresponsevalid_n
+			vga_hs_writeresponsevalid_n : out std_logic;                                       -- writeresponsevalid_n
+			vga_r_writeresponsevalid_n  : out std_logic;                                       -- writeresponsevalid_n
+			vga_vs_writeresponsevalid_n : out std_logic                                        -- writeresponsevalid_n
 		);
 	end component arqt;
 

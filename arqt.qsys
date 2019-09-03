@@ -33,6 +33,22 @@
          type = "String";
       }
    }
+   element arqt
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element arqt
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element buttons
    {
       datum _sortIndex
@@ -132,22 +148,19 @@
    type="conduit"
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
- <interface
-   name="lcd_display"
-   internal="LCD_0.lcd_display"
-   type="conduit"
-   dir="end" />
- <interface
-   name="lcd_enable"
-   internal="LCD_0.lcd_enable"
-   type="conduit"
-   dir="end" />
- <interface name="lcd_rs" internal="LCD_0.lcd_rs" type="conduit" dir="end" />
- <interface name="lcd_rw" internal="LCD_0.lcd_rw" type="conduit" dir="end" />
+ <interface name="display" internal="LCD_0.display" type="conduit" dir="end" />
+ <interface name="en" internal="LCD_0.en" type="conduit" dir="end" />
+ <interface name="lcd_display" internal="LCD_0.lcd_display" />
+ <interface name="lcd_enable" internal="LCD_0.lcd_enable" />
+ <interface name="lcd_rs" internal="LCD_0.lcd_rs" />
+ <interface name="lcd_rw" internal="LCD_0.lcd_rw" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <interface name="rs" internal="LCD_0.rs" type="conduit" dir="end" />
+ <interface name="rw" internal="LCD_0.rw" type="conduit" dir="end" />
  <interface name="vga_b" internal="VGA_0.VGA_B" type="conduit" dir="end" />
  <interface name="vga_g" internal="VGA_0.VGA_G" type="conduit" dir="end" />
- <interface name="vga_hs_o" internal="VGA_0.VGA_HS_O" type="conduit" dir="end" />
+ <interface name="vga_hs" internal="VGA_0.VGA_HS" type="conduit" dir="end" />
+ <interface name="vga_hs_o" internal="VGA_0.VGA_HS_O" />
  <interface name="vga_o_active" internal="VGA_0.o_active" />
  <interface name="vga_o_animate" internal="VGA_0.o_animate" />
  <interface name="vga_o_blanking" internal="VGA_0.o_blanking" />
@@ -157,7 +170,8 @@
  <interface name="vga_o_x" internal="VGA_0.o_x" />
  <interface name="vga_o_y" internal="VGA_0.o_y" />
  <interface name="vga_r" internal="VGA_0.VGA_R" type="conduit" dir="end" />
- <interface name="vga_vs_o" internal="VGA_0.VGA_VS_O" type="conduit" dir="end" />
+ <interface name="vga_vs" internal="VGA_0.VGA_VS" type="conduit" dir="end" />
+ <interface name="vga_vs_o" internal="VGA_0.VGA_VS_O" />
  <module name="LCD_0" kind="LCD" version="1.0" enabled="1" />
  <module name="VGA_0" kind="VGA" version="1.0" enabled="1" />
  <module name="buttons" kind="altera_avalon_pio" version="16.1" enabled="1">

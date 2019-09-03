@@ -1,6 +1,6 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="625ce29f2535c576e7bd"/>
+    <hash md5_digest_80b="c9d04ee3f6045d6b1ee9"/>
   </project>
   <file_info>
     <file device="EP4CE6E22C8" path="problema1.sof" usercode="0xFFFFFFFF"/>
@@ -99,7 +99,7 @@
     </sld_info>
     <sld_info hpath="arqt:inst2" name="inst2">
       <assignment_values>
-        <assignment_value text="QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1567452530"/>
+        <assignment_value text="QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1567518826"/>
       </assignment_values>
       <parameters/>
     </sld_info>

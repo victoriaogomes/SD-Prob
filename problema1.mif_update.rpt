@@ -1,0 +1,91 @@
+MIF/HEX Update report for problema1
+Tue Sep  3 11:43:37 2019
+Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. MIF/HEX Update Summary
+  3. MIF/HEX Update Processed Files
+  4. MIF/HEX Update Messages
+  5. MIF/HEX Update Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2016  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------+
+; MIF/HEX Update Summary                                        ;
++-----------------------+---------------------------------------+
+; MIF/HEX Update Status ; Successful - Tue Sep  3 11:43:37 2019 ;
+; Revision Name         ; problema1                             ;
+; Top-level Entity Name ; problema1                             ;
+; Family                ; Cyclone IV E                          ;
+; Device                ; EP4CE6E22C8                           ;
++-----------------------+---------------------------------------+
+
+
++---------------------------------------------------+
+; MIF/HEX Update Processed Files                    ;
++---------------------------------------------------+
+; File Name                                         ;
++---------------------------------------------------+
+; /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex ;
++---------------------------------------------------+
+
+
++-------------------------+
+; MIF/HEX Update Messages ;
++-------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime MIF/HEX Update
+    Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
+    Info: Processing started: Tue Sep  3 11:43:37 2019
+Info: Command: quartus_cdb Problema1 -c problema1 --update_mif
+Warning (113015): Width of data items in "onchip_mem.hex" is greater than the memory width. Wrapping data items to subsequent addresses. Found 256 warnings, reporting 10 File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 1
+    Warning (113009): Data at line (2) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 2
+    Warning (113009): Data at line (3) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 3
+    Warning (113009): Data at line (4) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 4
+    Warning (113009): Data at line (5) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 5
+    Warning (113009): Data at line (6) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 6
+    Warning (113009): Data at line (7) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 7
+    Warning (113009): Data at line (8) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 8
+    Warning (113009): Data at line (9) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 9
+    Warning (113009): Data at line (10) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 10
+    Warning (113009): Data at line (11) of memory initialization file "onchip_mem.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses. File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 11
+Info (39024): Processed the following Memory Initialization File(s)
+    Info (39025): Processed Memory Initialization File /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex File: /home/lab-lenda01/Imagens/SD-Prob3/onchip_mem.hex Line: 0
+Info (144001): Generated suppressed messages file /home/lab-lenda01/Imagens/SD-Prob3/problema1.mif_update.smsg
+Info: Quartus Prime MIF/HEX Update was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 1154 megabytes
+    Info: Processing ended: Tue Sep  3 11:43:37 2019
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++------------------------------------+
+; MIF/HEX Update Suppressed Messages ;
++------------------------------------+
+The suppressed messages can be found in /home/lab-lenda01/Imagens/SD-Prob3/problema1.mif_update.smsg.
+
+
