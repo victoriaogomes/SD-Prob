@@ -2,7 +2,7 @@ set_global_assignment -entity "arqt" -library "arqt" -name IP_TOOL_NAME "Qsys"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_TOOL_VERSION "16.1"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "arqt" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../arqt.sopcinfo"]
-set_global_assignment -entity "arqt" -library "arqt" -name SLD_INFO "QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1567518826"
+set_global_assignment -entity "arqt" -library "arqt" -name SLD_INFO "QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1567525304"
 set_global_assignment -library "arqt" -name MISC_FILE [file join $::quartus(qip_path) "../arqt.cmp"]
 set_global_assignment -library "arqt" -name SLD_FILE [file join $::quartus(qip_path) "arqt.regmap"]
 set_global_assignment -library "arqt" -name SLD_FILE [file join $::quartus(qip_path) "arqt.debuginfo"]
@@ -16,7 +16,7 @@ set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_DISPLAY_
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_REPORT_HIERARCHY "On"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTU2NzUxODgyNg==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTU2NzUyNTMwNA==::QXV0byBHRU5FUkFUSU9OX0lE"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBJViBF::QXV0byBERVZJQ0VfRkFNSUxZ"
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::RVA0Q0U2RTIyQzg=::QXV0byBERVZJQ0U="
 set_global_assignment -entity "arqt" -library "arqt" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::OA==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
@@ -983,15 +983,15 @@ set_global_assignment -library "arqt" -name SYSTEMVERILOG_FILE [file join $::qua
 set_global_assignment -library "arqt" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_custom_instruction_master_multi_xconnect.sv"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_customins_master_translator.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0.v"]
-set_global_assignment -library "arqt" -name SOURCE_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_rf_ram_a.mif"]
+set_global_assignment -library "arqt" -name SDC_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu.sdc"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_debug_slave_sysclk.v"]
-set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_debug_slave_wrapper.v"]
-set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_test_bench.v"]
-set_global_assignment -library "arqt" -name SOURCE_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_ociram_default_contents.mif"]
-set_global_assignment -library "arqt" -name SDC_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu.sdc"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_debug_slave_tck.v"]
+set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_debug_slave_wrapper.v"]
+set_global_assignment -library "arqt" -name SOURCE_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_ociram_default_contents.mif"]
+set_global_assignment -library "arqt" -name SOURCE_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_rf_ram_a.mif"]
 set_global_assignment -library "arqt" -name SOURCE_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_rf_ram_b.mif"]
+set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_nios2_gen2_0_cpu_test_bench.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_memoria.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_jtag_uart_0.v"]
 set_global_assignment -library "arqt" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arqt_buttons.v"]

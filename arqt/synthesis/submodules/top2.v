@@ -1,7 +1,7 @@
 module top2(
     input wire CLK,             // Clock da placa.
     input wire CLK_EN,          // Clock para habilitar a instrução customizada
-    input wire [31:0] dataa,    // Entrada para envio de coordenadas de x e y
+    input wire [31:0] dataa,    // Entrada para envio de coordenadas de y da barra 1 e 2
     input  wire RST_BTN,        // Botão de reset
     output wire [31:0] result,  // Output que irá fornecer a pontuação do jogador
     output wire VGA_HS_O,       // Output do sinal horizontal
