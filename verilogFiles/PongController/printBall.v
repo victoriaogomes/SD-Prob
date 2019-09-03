@@ -1,7 +1,7 @@
 // Animação com a bola
 
 module printBall #(
-    H_SIZE=20,                                  // Metade da largura da bola
+    H_SIZE=40,                                  // Metade da largura da bola
     IX=320,                                     // Posição inicial horizontal do centro da bola
     IY=240,                                     // Posição inicial vertical do centro da bola
     IX_DIR=1,                                   // Direção horizontal inicial: 1 é direita, 0 é esquerda
@@ -15,6 +15,7 @@ module printBall #(
     input wire i_ani_stb,                       // Clock da animação: o clock do pixel é 1 pixel/frame
     input wire i_rst,                           // Reset: retorna a animação para o início
     input wire i_animate,                       // Anima quando está alto
+    output reg color,                           // Input que informa se deve printar a bola
     output wire [11:0] o_x1,                    // Borda esquerda do quadrado: valor de 12 bits: 0-4095
     output wire [11:0] o_x2,                    // Borda direita do quadrado
     output wire [11:0] o_y1,                    // Borda do topo do quadrado
@@ -42,6 +43,7 @@ module printBall #(
         end
         if (i_animate && i_ani_stb)             //Se o pixel de animar e o clock está correto,
         begin
+            color <= 1;
             x <= (x_dir) ? x + 1 : x - 1;       // Mova para esquerda se a posição é positiva
             y <= (y_dir) ? y + 1 : y - 1;       // Mova para baixo se a direção é positiva
 
@@ -54,5 +56,6 @@ module printBall #(
             if (y >= (D_HEIGHT - H_SIZE - 1))   // Borda do quadrado bate no fundo da tela
                 y_dir <= 0;                     // Vá para cima
         end
+        else color <= 0;
     end
 endmodule
