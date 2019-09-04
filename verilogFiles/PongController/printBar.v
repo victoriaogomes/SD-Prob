@@ -1,4 +1,4 @@
-module printBar #(parameter y_barraInicial = 240, x_barra = 10)(
+module printBar #(parameter y_barraInicial = 195, x_barra = 10)(
     input wire clk_in,                                             // Clock base (vindo da placa)
     input wire clk_en,                                             // Clock para habilitar a instrução customizada
     input wire i_rst,                                              // Reset: recomeça a imprimir o quadro
@@ -7,6 +7,7 @@ module printBar #(parameter y_barraInicial = 240, x_barra = 10)(
     input wire [8:0] o_y,                                          // Posição y atual do pixel
     input wire [8:0] coordY,                                       // Coordenada para impressão em y
     input wire refreshBar,                                         // Indica se deve atualizar a barra ou não
+    output wire [8:0] y_Atual,                                      // Indica a posição atual da barra
     output reg color                                               // Indica se está imprimindo ou não (1 imprimindo, 0 não)
 );
 
@@ -17,8 +18,9 @@ reg [8:0] y_barraAux;                                              // Auxiliar p
 reg [19:0] delay = 0;                                              // Tempo que deve ser esperado até atualizar as coordenadas
 reg startDelay = 0;                                                // Sinal que indica se o delay deve ser iniciado
 localparam tamBarraX = 10,                                         // Tamanho da barra no eixo x
-           tamBarraY = 60;                                         // Tamanho da barra no eixo y
+           tamBarraY = 90;                                         // Tamanho da barra no eixo y
 reg cor;                                                           // Fio auxiliar para manipular o valor do registrador color
+assign y_Atual = y_barra;
 
 always @(posedge clk_in) begin                                     // A cada pulso de clock
     if (clk_en) begin

@@ -1,5 +1,5 @@
 module top2(
-    input wire CLK,             // Clock da placa.
+    input wire CLK,             // Clock da placa
     input wire CLK_EN,          // Clock para habilitar a instrução customizada
     input wire [31:0] dataa,    // Entrada para envio de coordenadas de y da barra 1 e 2
     input  wire RST_BTN,        // Botão de reset
@@ -19,8 +19,11 @@ module top2(
     wire selectColor3;          // Fio para informar se a cor do desenho da bolinha será azul ou roxo
     reg refreshBar1;            // Informa se a barra 1 será atualizada ou não
     reg refreshBar2;            // Informa se a barra 2 será atualizada ou não
-    reg [9:0] yBar1 = 3'd240;            // Registrador para armazenar o valor da posição y da barra 1
-    reg [9:0] yBar2 = 3'd240;            // Registrador para armazenar o valor da posição y da barra 2
+    wire [8:0] barra1Atual;     // Informa a posição atual da barra 1 no eixo y
+    wire [8:0] barra2Atual;     // Informa a posição atual da barra 2 no eixo y
+
+    reg [8:0] yBar1;            // Registrador para armazenar o novo valor da posição y da barra 1
+    reg [8:0] yBar2;            // Registrador para armazenar o novo valor da posição y da barra 2
 
     reg [15:0] cnt;
     reg pix_stb;
@@ -48,7 +51,8 @@ module top2(
       .o_x(x),                  // Posição x atual do pixel
       .o_y(y),                  // Posição y atual do pixel
       .coordY(yBar1),           // Nova posição y da barra 1
-      .refreshBar(refreshBar1),
+      .refreshBar(refreshBar1), // Indica se a posição da barra deve ser atualizada ou não
+      .y_Atual(barra1Atual),    // Indica a posição atual da barra 1 no eixo y
       .color(selectColor1)      // Saída para indicar a cor do que deve ser escrito
     );
 
@@ -60,7 +64,8 @@ module top2(
       .o_x(x),                  // Posição x atual do pixel
       .o_y(y),                  // Posição y atual do pixel
       .coordY(yBar2),           // Nova posição do y da barra 2
-      .refreshBar(refreshBar2),
+      .refreshBar(refreshBar2), // Indica se a posição da barra deve ser atualizada ou não
+      .y_Atual(barra2Atual),    // Indica a posição atual da barra 2 no eixo y
       .color(selectColor2)      // Saída para indicar a cor do que deve ser escrito
     );
 
@@ -70,8 +75,8 @@ module top2(
         .o_active(activeArea),    // Indicador de área ativa
         .o_x(x),                  // Posição x atual do pixel
         .o_y(y),                  // Posição y atual do pixel
-        .pos_yBarra1(yBar1),      // Posição y atual da barra 1
-        .pos_yBarra2(yBar2),      // Posição y atual da barra 2
+        .pos_yBarra1(barra1Atual),// Posição y atual da barra 1
+        .pos_yBarra2(barra2Atual),// Posição y atual da barra 2
         .color(selectColor3)      // Saída para indicar a cor do que deve ser escrito
     );
 
