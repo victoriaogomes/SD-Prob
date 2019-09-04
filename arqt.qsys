@@ -49,6 +49,14 @@
          type = "String";
       }
    }
+   element arqt
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element buttons
    {
       datum _sortIndex
@@ -155,9 +163,9 @@
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface name="vga_b" internal="VGA_0.VGA_B" type="conduit" dir="end" />
  <interface name="vga_g" internal="VGA_0.VGA_G" type="conduit" dir="end" />
- <interface name="vga_hs" internal="VGA_0.VGA_HS" type="conduit" dir="end" />
+ <interface name="vga_hs" internal="VGA_0.HS" type="conduit" dir="end" />
  <interface name="vga_r" internal="VGA_0.VGA_R" type="conduit" dir="end" />
- <interface name="vga_vs" internal="VGA_0.VGA_VS" type="conduit" dir="end" />
+ <interface name="vga_vs" internal="VGA_0.VS" type="conduit" dir="end" />
  <module name="LCD_0" kind="LCD" version="1.0" enabled="1" />
  <module name="VGA_0" kind="VGA" version="1.0" enabled="1" />
  <module name="buttons" kind="altera_avalon_pio" version="16.1" enabled="1">

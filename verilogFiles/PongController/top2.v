@@ -17,10 +17,10 @@ module top2(
     wire selectColor1;          // Fio para informar se a cor do desenho da barra 1 será azul ou roxo
     wire selectColor2;          // Fio para informar se a cor do desenho da barra 2 será azul ou roxo
     wire selectColor3;          // Fio para informar se a cor do desenho da bolinha será azul ou roxo
-    reg refreshBar1;
-    reg refreshBar2;
-    reg [9:0] yBar1;            // Registrador para armazenar o valor da posição y da barra 1
-    reg [9:0] yBar2;            // Registrador para armazenar o valor da posição y da barra 2
+    reg refreshBar1;            // Informa se a barra 1 será atualizada ou não
+    reg refreshBar2;            // Informa se a barra 2 será atualizada ou não
+    reg [9:0] yBar1 = 3'd240;            // Registrador para armazenar o valor da posição y da barra 1
+    reg [9:0] yBar2 = 3'd240;            // Registrador para armazenar o valor da posição y da barra 2
 
     reg [15:0] cnt;
     reg pix_stb;
@@ -64,12 +64,14 @@ module top2(
       .color(selectColor2)      // Saída para indicar a cor do que deve ser escrito
     );
 
-    printBallv2 sq_a_anim (
+    printBall ball (
         .clk_in(pix_stb),         // Clock da FPGA
         .i_rst(RST_BTN),          // Botão de reset
         .o_active(activeArea),    // Indicador de área ativa
         .o_x(x),                  // Posição x atual do pixel
         .o_y(y),                  // Posição y atual do pixel
+        .pos_yBarra1(yBar1),      // Posição y atual da barra 1
+        .pos_yBarra2(yBar2),      // Posição y atual da barra 2
         .color(selectColor3)      // Saída para indicar a cor do que deve ser escrito
     );
 

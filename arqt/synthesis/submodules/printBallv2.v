@@ -25,7 +25,7 @@ always @(posedge clk_in) begin                                     // A cada pul
     else delay <= delay + 1'b1;
   end
   if(o_x == 639 && o_y == 479 && startDelay == 0) begin
-    x_bola <= x_bola + 5;                                       // Atualiza valor de Y
+    x_bola <= x_bola + 1;                                       // Atualiza valor de Y
     startDelay <=1;
   end
 end
@@ -37,8 +37,8 @@ end
 
 always @(*) begin
     if(o_active) begin                                             // Caso esteja na área ativa
-        if(o_x >= x_bola && o_x <= (x_bola+tamBolaX)) begin        // Verifica se está na posição x da barra para desenhá-la
-            if(o_y >= y_bola && o_y <= (y_bola+tamBolaY)) begin         // Verifica se está na posição y da barra para desenhá-la
+        if(o_x >= x_bola && o_x <= (x_bola+tamBolaX)) begin        // Verifica se está na posição x da bola para desenhá-la
+            if(o_y >= y_bola && o_y <= (y_bola+tamBolaY)) begin         // Verifica se está na posição y da bola para desenhá-la
                 cor = 1;
             end
             else cor = 0;

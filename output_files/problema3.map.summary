@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Tue Sep 03 15:05:34 2019
+Analysis & Synthesis Status : Successful - Tue Sep 03 22:21:09 2019
 Quartus Prime Version : 16.1.2 Build 203 01/18/2017 SJ Lite Edition
 Revision Name : problema3
 Top-level Entity Name : problema3
 Family : Cyclone IV E
-Total logic elements : 2,103
-    Total combinational functions : 1,869
-    Dedicated logic registers : 1,075
-Total registers : 1075
+Total logic elements : 2,124
+    Total combinational functions : 1,890
+    Dedicated logic registers : 1,076
+Total registers : 1076
 Total pins : 22
 Total virtual pins : 0
 Total memory bits : 76,800

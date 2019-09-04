@@ -1,61 +1,59 @@
-// Animação com a bola
+module printBall(
+    input wire clk_in,                                             // Clock base (vindo da placa)
+    input wire i_rst,                                              // Reset: recomeça a imprimir o quadro
+    input wire o_active,                                           // Alto quando um pixel está sendo desenhado
+    input wire [9:0] o_x,                                          // Posição x atual do pixel
+    input wire [8:0] o_y,                                          // Posição y atual do pixel
+    input wire [8:0] pos_yBarra1,
+    input wire [8:0] pos_yBarra2,
+    output reg color                                               // Indica se está imprimindo ou não (1 imprimindo, 0 não)
+);
 
-module printBall #(
-    H_SIZE=40,                                  // Metade da largura da bola
-    IX=320,                                     // Posição inicial horizontal do centro da bola
-    IY=240,                                     // Posição inicial vertical do centro da bola
-    IX_DIR=1,                                   // Direção horizontal inicial: 1 é direita, 0 é esquerda
-    IY_DIR=1,                                   // Direção vertical inicial: 1 é baixo, 0 é cima
-    D_WIDTH=640,                                // Largura da tela
-    D_HEIGHT=480                                // Altura da tela
-  )
+// Barra: 10x60
+// Bolinha: 40x40
+reg [8:0] y_bola = 270;                                            // Posição inicial da bola em y
+reg [8:0] x_bola = 260;                                            // Posição inicial da bola em x
+reg [19:0] delay = 0;                                              // Tempo que deve ser esperado até atualizar as coordenadas
+reg startDelay = 1;                                                // Sinal que indica se o delay deve ser iniciado
+reg velocidadeBar = 5;
+localparam tamBolaX = 8,                                         // Tamanho da bola no eixo x
+           tamBolaY = 8,                                         // Tamanho da bola no eixo y
+           pos_xBarra1 = 10,
+           pos_xBarra2 = 620;
+reg cor;                                                           // Fio auxiliar para manipular o valor do registrador color
 
-    (
-    input wire i_clk,                           // Clock base
-    input wire i_ani_stb,                       // Clock da animação: o clock do pixel é 1 pixel/frame
-    input wire i_rst,                           // Reset: retorna a animação para o início
-    input wire i_animate,                       // Anima quando está alto
-    output reg color,                           // Input que informa se deve printar a bola
-    output wire [11:0] o_x1,                    // Borda esquerda do quadrado: valor de 12 bits: 0-4095
-    output wire [11:0] o_x2,                    // Borda direita do quadrado
-    output wire [11:0] o_y1,                    // Borda do topo do quadrado
-    output wire [11:0] o_y2                     // Borda do fundo do quadrado
-    );
-
-    reg [11:0] x = IX;                          // Posição horizontal do centro do quadrado
-    reg [11:0] y = IY;                          // Posição horizontal do centro do quadrado
-    reg x_dir = IX_DIR;                         // Direção horizontal da animação
-    reg y_dir = IY_DIR;                         // Direção vertical da animação
-
-    assign o_x1 = x - H_SIZE;                   // Esquerda: centro menos a metade do tamanho horizontal
-    assign o_x2 = x + H_SIZE;                   // Direita
-    assign o_y1 = y - H_SIZE;                   // Topo
-    assign o_y2 = y + H_SIZE;                   // Fundo
-
-    always @ (posedge i_clk)
-    begin
-        if (i_rst)                              // Quando reseta, reinicia a posição
-        begin
-            x <= IX;
-            y <= IY;
-            x_dir <= IX_DIR;
-            y_dir <= IY_DIR;
-        end
-        if (i_animate && i_ani_stb)             //Se o pixel de animar e o clock está correto,
-        begin
-            color <= 1;
-            x <= (x_dir) ? x + 1 : x - 1;       // Mova para esquerda se a posição é positiva
-            y <= (y_dir) ? y + 1 : y - 1;       // Mova para baixo se a direção é positiva
-
-            if (x <= H_SIZE + 1)                // Borda do quadrado bate na borda esquerda da tela
-                x_dir <= 1;                     // Vá para a direita
-            if (x >= (D_WIDTH - H_SIZE - 1))    // Borda do quadrado bate na borda direita da tela
-                x_dir <= 0;                     // Vá para a esquerda
-            if (y <= H_SIZE + 1)                // Borda do quadrado bate no topo da tela
-                y_dir <= 1;                     // Vá para baixo
-            if (y >= (D_HEIGHT - H_SIZE - 1))   // Borda do quadrado bate no fundo da tela
-                y_dir <= 0;                     // Vá para cima
-        end
-        else color <= 0;
+always @(posedge clk_in) begin                                     // A cada pulso de clock
+  if(startDelay) begin
+    if(delay == 20'hFFFFF) begin                           // Verifica se o delay já chegou ao final
+        startDelay <= 0;                                  // Seta variável para finalizar delay
+        delay <= 0;
     end
+    else delay <= delay + 1'b1;
+  end
+  if(o_x == 639 && o_y == 479 && startDelay == 0) begin
+    if(x_bola >= pos_xBarra1 && x_bola <= (pos_xBarra1+10) && y_bola >= pos_yBarra1 && y_bola <= (pos_yBarra1 + 60) )
+      velocidadeBar = ~velocidadeBar;
+    if(x_bola >= pos_xBarra2 && x_bola <= (pos_xBarra2+10) && y_bola >= pos_yBarra2 && y_bola <= (pos_yBarra2 + 60) )
+      velocidadeBar = ~velocidadeBar;                                       // Atualiza valor de Y                                 // Atualiza valor de Y
+    x_bola <= x_bola + velocidadeBar;
+    startDelay <=1;
+  end
+end
+
+
+always @(posedge clk_in) begin                                     // A cada pulso de clock
+    color <= cor;                                                  // O valor do fio 'cor' é armazenado no registrador 'color'
+end
+
+always @(*) begin
+    if(o_active) begin                                             // Caso esteja na área ativa
+        if(o_x >= x_bola && o_x <= (x_bola+tamBolaX)) begin        // Verifica se está na posição x da bola para desenhá-la
+            if(o_y >= y_bola && o_y <= (y_bola+tamBolaY)) begin         // Verifica se está na posição y da bola para desenhá-la
+                cor = 1;
+            end
+            else cor = 0;
+        end
+        else cor = 0;
+    end
+end
 endmodule

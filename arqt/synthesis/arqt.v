@@ -155,8 +155,8 @@ module arqt (
 		.dataa    (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_dataa),  //                              .dataa
 		.RST_BTN  (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_reset),  //                              .reset
 		.result   (nios2_gen2_0_custom_instruction_master_multi_slave_translator1_ci_master_result), //                              .result
-		.VGA_HS_O (vga_hs_writeresponsevalid_n),                                                     //                        VGA_HS.writeresponsevalid_n
-		.VGA_VS_O (vga_vs_writeresponsevalid_n),                                                     //                        VGA_VS.writeresponsevalid_n
+		.VGA_HS_O (vga_hs_writeresponsevalid_n),                                                     //                            HS.writeresponsevalid_n
+		.VGA_VS_O (vga_vs_writeresponsevalid_n),                                                     //                            VS.writeresponsevalid_n
 		.VGA_R    (vga_r_writeresponsevalid_n),                                                      //                         VGA_R.writeresponsevalid_n
 		.VGA_G    (vga_g_writeresponsevalid_n),                                                      //                         VGA_G.writeresponsevalid_n
 		.VGA_B    (vga_b_writeresponsevalid_n)                                                       //                         VGA_B.writeresponsevalid_n

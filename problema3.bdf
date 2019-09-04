@@ -24,7 +24,7 @@ agreement for further details.
 	(input)
 	(rect 56 88 224 104)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "buttons[3..0]" (rect 5 0 68 12)(font "Arial" ))
+	(text "buttons[3..0]" (rect 5 0 67 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -40,7 +40,7 @@ agreement for further details.
 	(input)
 	(rect 64 128 232 144)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "clock" (rect 5 0 31 12)(font "Arial" ))
+	(text "clock" (rect 5 0 30 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -56,7 +56,7 @@ agreement for further details.
 	(input)
 	(rect 64 328 232 344)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "reset" (rect 5 0 30 12)(font "Arial" ))
+	(text "reset" (rect 5 0 29 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -72,7 +72,7 @@ agreement for further details.
 	(output)
 	(rect 64 168 240 184)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "display[7..0]" (rect 5 4 67 16)(font "Arial" ))
+	(text "display[7..0]" (rect 5 4 66 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -89,7 +89,7 @@ agreement for further details.
 	(output)
 	(rect 64 208 240 224)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "enable" (rect 5 4 37 16)(font "Arial" ))
+	(text "enable" (rect 5 4 36 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -106,7 +106,7 @@ agreement for further details.
 	(output)
 	(rect 64 248 240 264)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "lcd_rs" (rect 5 4 35 16)(font "Arial" ))
+	(text "lcd_rs" (rect 5 4 34 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -123,7 +123,7 @@ agreement for further details.
 	(output)
 	(rect 64 288 240 304)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "lcd_rw" (rect 5 4 36 16)(font "Arial" ))
+	(text "lcd_rw" (rect 5 4 35 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -140,7 +140,7 @@ agreement for further details.
 	(output)
 	(rect 64 368 240 384)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "vga_b" (rect 5 4 36 16)(font "Arial" ))
+	(text "vga_b" (rect 5 4 35 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -157,7 +157,7 @@ agreement for further details.
 	(output)
 	(rect 64 408 240 424)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "vga_g" (rect 5 4 36 16)(font "Arial" ))
+	(text "vga_g" (rect 5 4 35 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -174,7 +174,7 @@ agreement for further details.
 	(output)
 	(rect 64 448 240 464)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "vga_hs" (rect 5 4 42 16)(font "Arial" ))
+	(text "vga_hs" (rect 5 4 41 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -191,7 +191,7 @@ agreement for further details.
 	(output)
 	(rect 64 488 240 504)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "vga_r" (rect 5 4 34 16)(font "Arial" ))
+	(text "vga_r" (rect 5 4 33 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -208,7 +208,7 @@ agreement for further details.
 	(output)
 	(rect 64 528 240 544)
 	(text "OUTPUT" (rect 137 6 175 16)(font "Arial" (font_size 6)))
-	(text "vga_vs" (rect 5 4 43 16)(font "Arial" ))
+	(text "vga_vs" (rect 5 4 42 16)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
