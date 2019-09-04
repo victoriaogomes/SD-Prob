@@ -11,8 +11,8 @@ module printBar #(parameter y_barraInicial = 195, x_barra = 10)(
     output reg color                                               // Indica se está imprimindo ou não (1 imprimindo, 0 não)
 );
 
-// Barra: 10x60
-// Bolinha: 40x40
+// Bolinha: 8x8
+// Barra: 10x90
 reg [8:0] y_barra = y_barraInicial;                                // Tamanho da barra
 reg [8:0] y_barraAux;                                              // Auxiliar para armazenar novo valor de Y até fim do delay
 reg [19:0] delay = 0;                                              // Tempo que deve ser esperado até atualizar as coordenadas
