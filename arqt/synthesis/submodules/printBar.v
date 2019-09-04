@@ -7,7 +7,7 @@ module printBar #(parameter y_barraInicial = 195, x_barra = 10)(
     input wire [8:0] o_y,                                          // Posição y atual do pixel
     input wire [8:0] coordY,                                       // Coordenada para impressão em y
     input wire refreshBar,                                         // Indica se deve atualizar a barra ou não
-    output wire [8:0] y_Atual,                                      // Indica a posição atual da barra
+    output wire [8:0] y_Atual,                                     // Indica a posição atual da barra
     output reg color                                               // Indica se está imprimindo ou não (1 imprimindo, 0 não)
 );
 
