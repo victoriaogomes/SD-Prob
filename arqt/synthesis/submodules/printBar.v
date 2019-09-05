@@ -32,7 +32,7 @@ always @(posedge clk_in) begin                                     // A cada pul
               y_barraAux <= y_barra + coordY;                      // Armazena o novo Y para ser usado depois
           end
           else begin
-            if((y_barra - coordY) >= 2)
+            if((y_barra - coordY) >= 6)
               y_barraAux <= y_barra - coordY;                     // Armazena o novo Y para ser usado depois
           end
       end
