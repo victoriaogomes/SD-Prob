@@ -1,5 +1,6 @@
 module printBar #(parameter y_barraInicial = 195, x_barra = 10)(
     input wire clk_in,                                             // Clock base (vindo da placa)
+    input wire incDec,                                             // Indica se a posição da barra deve incrementar (1) ou decrementar (0)
     input wire clk_en,                                             // Clock para habilitar a instrução customizada
     input wire i_rst,                                              // Reset: recomeça a imprimir o quadro
     input wire o_active,                                           // Alto quando um pixel está sendo desenhado
@@ -26,7 +27,14 @@ always @(posedge clk_in) begin                                     // A cada pul
     if (clk_en) begin
       if(refreshBar) begin
           startDelay <= 1;                                         // Seta variável para iniciar delay
-          y_barraAux <= coordY;                                    // Armazena o novo Y para ser usado depois
+          if(incDec == 1) begin
+            if((y_barra + 89 + coordY) <= 479)
+              y_barraAux <= y_barra + coordY;                      // Armazena o novo Y para ser usado depois
+          end
+          else begin
+            if((y_barra - coordY) >= 2)
+              y_barraAux <= y_barra - coordY;                     // Armazena o novo Y para ser usado depois
+          end
       end
     end
     else begin

@@ -1,12 +1,16 @@
 .equ switches, 0x00003030
-.equ leds, 0x00003020
+.equ delay15ms, 0xF424
+.equ delay4_1ms, 0x42BB
+.equ delay0_1ms, 0x1A0
+.equ delay100ms, 0x65B9A
+.equ delay0_053ms, 0xDC
+.equ delay1s, 0x3F940B
 
 .global _start
 
 # r2->Switches
-# r3-> Leds
 # r4 -> carrega o valor de botões
-# delay -> r8, r9, r10, r12, r13
+# delay -> r8, r9
 # r11 -> contador
 # r16 -> Escrita na função
 # r17 -> instruções do LCD
@@ -16,13 +20,51 @@
 
 _start:
 	movia r2, switches # Move para r2 o endereço dos switches
-	movia r3, leds # Move para r3 o endereço dos leds
-	movia r17, 0xc8
 	movia r16, 0x0
+	movia r14, 0x7
+	movia r20, 0xB
+	movia r10, 0xD
+	movia r12, 0xE
+	call loopMoveBar
+#	call turn_led_off # Chama a função que desligará todos os leds
+#	call set_constants # Chama a função que seta as constantes para os delays utilizados
+#	call initialize_lcd # Chama a função que inicializa o LCD
+
+loopMoveBar:
+	ldbio r3, 0(r2)
+	beq r3, r14, moveUpBar1
+	beq r3, r20, moveDownBar1
+	beq r3, r10, moveUpBar2
+	beq r3, r12, moveDownBar2
+	call loopMoveBar
+
+moveUpBar1:
+	# Subir/Descer barra | barra para mover | quantidade p mover
+	#					0										0								000001010
+	movia r17, 0xa
 	custom 1, r23, r17, r16
-	call turn_led_off # Chama a função que desligará todos os leds
-	call set_constants # Chama a função que seta as constantes para os delays utilizados
-	call initialize_lcd # Chama a função que inicializa o LCD
+	call loopMoveBar
+
+moveDownBar1:
+	# Subir/Descer barra | barra para mover | quantidade p mover
+	#					1										0								000001010
+	movia r17, 0x40a
+	custom 1, r23, r17, r16
+	call loopMoveBar
+
+moveUpBar2:
+	# Subir/Descer barra | barra para mover | quantidade p mover
+	#					0										1								000001010
+	movia r17, 0x20a
+	custom 1, r23, r17, r16
+	call loopMoveBar
+
+moveDownBar2:
+	# Subir/Descer barra | barra para mover | quantidade p mover
+	#					1										1								000001010
+	movia r17, 0x60a
+	custom 1, r23, r17, r16
+	call loopMoveBar
 
 score:
 	ldbio r4, 0(r2) # Carrega o valor do button em r4
@@ -85,46 +127,52 @@ initialize_lcd:
 # -------------------------------------------------  FUNÇÕES DE DELAY --------------------------------------------------- #
 
 delay_15ms:
-	addi r11, r11, 1 # Adiciona 1 no registrador r11
-	bne r11, r8, delay_15ms # Verifica se r11 armazena mesmo valor que r8 (se não, volta pro início do looping)
-	addi r11, r0, 0 # Zera o registrador r11
-	ret # Retorna para a rotina que chamou essa label
-
+	movia r8, delay15ms # Armazena o valor usado para o delay de 15ms em r8
+	loop15ms:
+		addi r9, r9, 1 # Adiciona 1 no registrador r9
+		bne r9, r8, loop15ms # Verifica se r9 armazena mesmo valor que r8 (se não, volta pro início do looping)
+		addi r9, r0, 0 # Zera o registrador r9
+	ret
 
 delay_4_1ms:
-	addi r11, r11, 1 # Adiciona 1 no registrador r11
-	bne r11, r9, delay_4_1ms # Verifica se r11 armazena mesmo valor que r9 (se não, volta pro início do looping)
-	addi r11, r0, 0 # Zera o registrador r11
-	ret # retorna para a rotina que chamou essa label
-
+	movia r8, delay4_1ms # Armazena o valor usado para o delay de 4.1ms em r8
+	loop4_1ms:
+		addi r9, r9, 1 # Adiciona 1 no registrador r9
+		bne r9, r8, loop4_1ms # Verifica se r9 armazena mesmo valor que r8 (se não, volta pro início do looping)
+		addi r9, r0, 0 # Zera o registrador r9
+	ret
 
 delay_0_1ms:
-	addi r11, r11, 1 # Adiciona 1 no registrador r11
-	bne r11, r10, delay_0_1ms # Verifica se r11 armazena mesmo valor que r10 (se não, volta pro início do looping)
-	addi r11, r0, 0 # Zera o registrador r11
-	ret # Retorna para a rotina que chamou essa label
-
+	movia r8, delay0_1ms # Armazena o valor usado para o delay de 0.1ms em r8
+	loop0_1ms:
+		addi r9, r9, 1 # Adiciona 1 no registrador r9
+		bne r9, r8, loop0_1ms # Verifica se r9 armazena mesmo valor que r8 (se não, volta pro início do looping)
+		addi r9, r0, 0 # Zera o registrador r9
+	ret
 
 delay_100ms:
-	addi r11, r11, 1 # Adiciona 1 no registrador r11
-	bne r11, r12, delay_100ms # Verifica se r11 armazena mesmo valor que r12 (se não, volta pro início do looping)
-	addi r11, r0, 0 # Zera o registrador r11
-	ret # Retorna para a rotina que chamou essa label
+	movia r8, delay100ms # Armazena o valor usado para o delay de 100ms em r8
+	loop100ms:
+		addi r9, r9, 1 # Adiciona 1 no registrador r9
+		bne r9, r8, loop100ms # Verifica se r9 armazena mesmo valor que r8 (se não, volta pro início do looping)
+		addi r9, r0, 0 # Zera o registrador r9
+	ret
 
+delay_1s:
+	movia r8, delay1s # Armazena o valor usado para o delay de 1s em r8
+	loop1s:
+		addi r9, r9, 1 # Adiciona 1 no registrador r9
+		bne r9, r8, loop1s # Verifica se r9 armazena mesmo valor que r8 (se não, volta pro início do looping)
+		addi r9, r0, 0 # Zera o registrador r9
+	ret
 
 delay_0_053ms:
-	addi r11, r11, 1 # Adiciona 1 no registrador r11
-	bne r11, r13, delay_0_053ms # Verifica se r11 armazena mesmo valor que r13 (se não, volta pro início do looping)
-	addi r11, r0, 0 # Zera o registrador r11
-	ret # Retorna para a rotina que chamou essa label
-
-
-# -------------------------------------------------  DESLIGA TODOS OS LEDS --------------------------------------------------- #
-
-turn_led_off:
-	movia r18, 0XF # Coloca o valor 0XF em r18, para desligar os leds
-	stbio r18, 0(r3) # Carrega nos leds o valor para deixá-los off
-	ret # Retorna para a rotina que chamou essa label
+	movia r8, delay0_053ms # Armazena o valor usado para o delay de 0.053ms em r8
+	loop0_053ms:
+		addi r9, r9, 1 # Adiciona 1 no registrador r9
+		bne r9, r8, loop0_053ms # Verifica se r9 armazena mesmo valor que r8 (se não, volta pro início do looping)
+		addi r9, r0, 0 # Zera o registrador r9
+	ret
 
 # ---------------------------------------------   ALTERNÂNCIA ENTRE LINHAS -------------------------------------------------- #
 line_one: # Muda o cursor do display para a primeira linha

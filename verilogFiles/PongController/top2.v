@@ -23,7 +23,9 @@ module top2(
     wire [8:0] barra2Atual;     // Informa a posição atual da barra 2 no eixo y
 
     reg [8:0] yBar1;            // Registrador para armazenar o novo valor da posição y da barra 1
+    reg incDecBar1;             // Bit para indicar se a posição da barra 1 deve ser incrementada (1) ou decrementada (0)
     reg [8:0] yBar2;            // Registrador para armazenar o novo valor da posição y da barra 2
+    reg incDecBar2;             // Bit para indicar se a posição da barra 2 deve ser incrementada (1) ou decrementada (0)
 
     reg [15:0] cnt;
     reg pix_stb;
@@ -47,6 +49,7 @@ module top2(
       .clk_in(pix_stb),         // Clock da FPGA
       .clk_en(CLK_EN),          // Clock Enable
       .i_rst(RST_BTN),          // Botão de reset
+      .incDec(incDecBar1),      // Indica se a posição da barra deve ser incrementada ou decrementada
       .o_active(activeArea),    // Indicador de área ativa
       .o_x(x),                  // Posição x atual do pixel
       .o_y(y),                  // Posição y atual do pixel
@@ -60,6 +63,7 @@ module top2(
       .clk_in(pix_stb),         // Clock da FPGA
       .clk_en(CLK_EN),          // Clock Enable
       .i_rst(RST_BTN),          // Botão de reset
+      .incDec(incDecBar2),      // Indica se a posição da barra deve ser incrementada ou decrementada
       .o_active(activeArea),    // Indicador de área ativa
       .o_x(x),                  // Posição x atual do pixel
       .o_y(y),                  // Posição y atual do pixel
@@ -81,15 +85,17 @@ module top2(
     );
 
     always @(posedge CLK_EN) begin
-      if(dataa[10] == 0) begin
-        yBar1 <= dataa[9:0];
-        refreshBar1 <=1;
-        refreshBar2 <=0;
+      if(dataa[9] == 0) begin
+        yBar1 <= dataa[8:0];
+        incDecBar1 <= dataa[10];
+        refreshBar1 <= 1;
+        refreshBar2 <= 0;
       end
       else begin
-        yBar2 <= dataa[9:0];
-        refreshBar1 <=0;
-        refreshBar2 <=1;
+        yBar2 <= dataa[8:0];
+        incDecBar2 <= dataa[10];
+        refreshBar1 <= 0;
+        refreshBar2 <= 1;
       end
     end
 
