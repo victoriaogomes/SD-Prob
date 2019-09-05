@@ -27,12 +27,19 @@ localparam tamBolaX = 8,                                                // Taman
            pos_xBarra2 = 620;                                           // Posição inicial fixa da barra 1 no eixo y
 reg cor;                                                                // Fio auxiliar para manipular o valor do registrador color
 wire [1:0] random_Y;
-wire [9:0] random_Pos;
+wire [12:0] random_Pos;
 
-rand_YandPos randValue (
+/*rand_YandPos randValue (
     .VGA_clk(clk_in),
     .rand_Y(random_Y),
     .rand_Pos(random_Pos)
+);*/
+
+ LFSR randValue (
+    .clock(clk_in),
+    .reset(i_rst),
+    .rnd(random_Pos),
+    .rnd_Y(random_Y)
 );
 
 always @(posedge clk_in) begin                                          // A cada pulso de clock
@@ -63,7 +70,7 @@ always @(posedge clk_in) begin                                          // A cad
     // Verifica se o eixo x e y da bola se encontra na barra 1
     if(x_bola >= pos_xBarra1 && x_bola <= (pos_xBarra1+10) && y_bola >= pos_yBarra1 && y_bola <= (pos_yBarra1 + 90) ) begin
       direcao = 0;                                                      // Direção = direita
-      upDown = random_Pos[2];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
+      upDown = random_Pos[0];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
       // Caso bola colida com a parte 1 ou 3 da barra
       if(y_bola >= pos_yBarra1 && y_bola <= (pos_yBarra1 + 30) || y_bola >= (pos_yBarra1 + 60) && y_bola <= (pos_yBarra1 + 90))
         aleatory = 1;                                                   // Indica que a bola deve retornar aleatoriamente
@@ -74,7 +81,7 @@ always @(posedge clk_in) begin                                          // A cad
     // Verifica se o eixo x e y da bola se encontra na barra 2
     if(x_bola >= (pos_xBarra2-10) && x_bola <= (pos_xBarra2) && y_bola >= pos_yBarra2 && y_bola <= (pos_yBarra2 + 90) ) begin
       direcao = 1;                                                      // Direção = esquerda
-      upDown = random_Pos[2];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
+      upDown = random_Pos[1];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
       // Caso bola colida com a parte 1 ou 3 da barra
       if(y_bola >= pos_yBarra2 && y_bola <= (pos_yBarra2 + 30) || y_bola >= (pos_yBarra2 + 60) && y_bola <= (pos_yBarra2 + 90))
         aleatory = 1;                                                   // Indica que a bola deve retornar aleatoriamente

@@ -643,7 +643,7 @@ color <= color~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 |problema3|arqt:inst|top2:vga_0|printBall:ball
 clk_in => clk_in.IN1
-i_rst => ~NO_FANOUT~
+i_rst => i_rst.IN1
 o_active => cor.LATCH_ENABLE
 o_x[0] => LessThan20.IN11
 o_x[0] => LessThan21.IN20
@@ -785,57 +785,25 @@ pointPlayer2 <= pointPlayer2~reg0.DB_MAX_OUTPUT_PORT_TYPE
 color <= color~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|problema3|arqt:inst|top2:vga_0|printBall:ball|rand_YandPos:randValue
-VGA_clk => rand_Y[0]~reg0.CLK
-VGA_clk => rand_Y[1]~reg0.CLK
-VGA_clk => rand_Y[2]~reg0.CLK
-VGA_clk => rand_Y[3]~reg0.CLK
-VGA_clk => rand_Y[4]~reg0.CLK
-VGA_clk => rand_Y[5]~reg0.CLK
-VGA_clk => rand_Y[6]~reg0.CLK
-VGA_clk => rand_Y[7]~reg0.CLK
-VGA_clk => rand_Y[8]~reg0.CLK
-VGA_clk => rand_Pos[0]~reg0.CLK
-VGA_clk => rand_Pos[1]~reg0.CLK
-VGA_clk => rand_Pos[2]~reg0.CLK
-VGA_clk => rand_Pos[3]~reg0.CLK
-VGA_clk => rand_Pos[4]~reg0.CLK
-VGA_clk => rand_Pos[5]~reg0.CLK
-VGA_clk => rand_Pos[6]~reg0.CLK
-VGA_clk => rand_Pos[7]~reg0.CLK
-VGA_clk => rand_Pos[8]~reg0.CLK
-VGA_clk => rand_Pos[9]~reg0.CLK
-VGA_clk => pointY[0].CLK
-VGA_clk => pointY[1].CLK
-VGA_clk => pointY[2].CLK
-VGA_clk => pointY[3].CLK
-VGA_clk => pointY[4].CLK
-VGA_clk => pointY[5].CLK
-VGA_clk => pointPos[0].CLK
-VGA_clk => pointPos[1].CLK
-VGA_clk => pointPos[2].CLK
-VGA_clk => pointPos[3].CLK
-VGA_clk => pointPos[4].CLK
-VGA_clk => pointPos[5].CLK
-rand_Y[0] <= rand_Y[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[1] <= rand_Y[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[2] <= rand_Y[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[3] <= rand_Y[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[4] <= rand_Y[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[5] <= rand_Y[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[6] <= rand_Y[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[7] <= rand_Y[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Y[8] <= rand_Y[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[0] <= rand_Pos[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[1] <= rand_Pos[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[2] <= rand_Pos[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[3] <= rand_Pos[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[4] <= rand_Pos[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[5] <= rand_Pos[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[6] <= rand_Pos[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[7] <= rand_Pos[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[8] <= rand_Pos[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-rand_Pos[9] <= rand_Pos[9]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+|problema3|arqt:inst|top2:vga_0|printBall:ball|LFSR:randValue
+clock => rnd~reg0.CLK
+clock => rnd_Y[0]~reg0.CLK
+clock => rnd_Y[1]~reg0.CLK
+clock => rnd_Y[2]~reg0.CLK
+clock => rnd_Y[3]~reg0.CLK
+clock => rnd_Y[4]~reg0.CLK
+reset => rnd~reg0.ALOAD
+reset => rnd_Y[0]~reg0.PRESET
+reset => rnd_Y[1]~reg0.PRESET
+reset => rnd_Y[2]~reg0.PRESET
+reset => rnd_Y[3]~reg0.PRESET
+reset => rnd_Y[4]~reg0.PRESET
+rnd_Y[0] <= rnd_Y[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+rnd_Y[1] <= rnd_Y[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+rnd_Y[2] <= rnd_Y[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+rnd_Y[3] <= rnd_Y[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+rnd_Y[4] <= rnd_Y[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+rnd <= rnd~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |problema3|arqt:inst|arqt_buttons:buttons
