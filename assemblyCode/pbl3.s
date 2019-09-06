@@ -36,7 +36,11 @@ loopMoveBar:
 	beq r3, r20, moveDownBar1
 	beq r3, r10, moveUpBar2
 	beq r3, r12, moveDownBar2
+	call refreshPoints
 	call loopMoveBar
+
+refreshPoints:
+	
 
 moveUpBar1:
 	# Subir/Descer barra | barra para mover | quantidade p mover

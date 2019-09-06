@@ -30,7 +30,7 @@ always @(posedge clk_in) begin                                     // A cada pul
         if(refreshBar) begin
             startDelay <= 1;                                         // Seta variável para iniciar delay
             if(incDec == 1) begin
-              if((y_barra + 89 + coordY) <= 479)
+              if((y_barra + 89 + coordY) <= 472)
                 y_barraAux <= y_barra + coordY;                      // Armazena o novo Y para ser usado depois
             end
             else begin

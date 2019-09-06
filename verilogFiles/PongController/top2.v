@@ -96,6 +96,10 @@ module top2(
         .color(selectColors[3])   // Saída para indicar a cor do que deve ser escrito
     );
 
+    /*      31:17    |    16    |     15:1     | 0
+        pointPlayer1 | Dirty bit| pointPlayer2 | Dirty bit
+    */
+
     always @(posedge CLK_EN) begin
       if(enableGame) begin
         if(dataa[9] == 0) begin

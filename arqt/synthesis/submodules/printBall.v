@@ -64,7 +64,7 @@ always @(posedge clk_in) begin                                          // A cad
       // Verifica se o eixo x e y da bola se encontra na barra 1
       if(x_bola >= pos_xBarra1 && x_bola <= (pos_xBarra1+10) && (y_bola + 8) >= pos_yBarra1 && (y_bola) <= (pos_yBarra1 + 90) ) begin
         direcao = 0;                                                      // Direção = direita
-        upDown = random_Pos[0];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
+        upDown = random_Pos[2];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
         // Caso bola colida com a parte 1 ou 3 da barra
         if((y_bola + 8) >= pos_yBarra1 && (y_bola) <= (pos_yBarra1 + 30) || (y_bola + 8) >= (pos_yBarra1 + 60) && (y_bola) <= (pos_yBarra1 + 90))
           aleatory = 1;                                                   // Indica que a bola deve retornar aleatoriamente
@@ -75,7 +75,7 @@ always @(posedge clk_in) begin                                          // A cad
       // Verifica se o eixo x e y da bola se encontra na barra 2
       if(x_bola >= (pos_xBarra2-10) && x_bola <= (pos_xBarra2) && (y_bola + 8) >= pos_yBarra2 && (y_bola) <= (pos_yBarra2 + 90) ) begin
         direcao = 1;                                                      // Direção = esquerda
-        upDown = random_Pos[1];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
+        upDown = random_Pos[4];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
         // Caso bola colida com a parte 1 ou 3 da barra
         if((y_bola + 8) >= pos_yBarra2 && (y_bola) <= (pos_yBarra2 + 30) || (y_bola + 8) >= (pos_yBarra2 + 60) && (y_bola) <= (pos_yBarra2 + 90))
           aleatory = 1;                                                   // Indica que a bola deve retornar aleatoriamente
