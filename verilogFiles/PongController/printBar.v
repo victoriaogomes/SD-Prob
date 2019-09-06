@@ -3,6 +3,7 @@ module printBar #(parameter y_barraInicial = 195, x_barra = 10)(
     input wire incDec,                                             // Indica se a posição da barra deve incrementar (1) ou decrementar (0)
     input wire clk_en,                                             // Clock para habilitar a instrução customizada
     input wire i_rst,                                              // Reset: recomeça a imprimir o quadro
+    input wire enablePong,
     input wire o_active,                                           // Alto quando um pixel está sendo desenhado
     input wire [9:0] o_x,                                          // Posição x atual do pixel
     input wire [8:0] o_y,                                          // Posição y atual do pixel
@@ -14,7 +15,7 @@ module printBar #(parameter y_barraInicial = 195, x_barra = 10)(
 
 // Bolinha: 8x8
 // Barra: 10x90
-reg [8:0] y_barra = y_barraInicial;                                // Tamanho da barra
+reg [8:0] y_barra = y_barraInicial;                                // Posição da barra no eixo y
 reg [8:0] y_barraAux;                                              // Auxiliar para armazenar novo valor de Y até fim do delay
 reg [19:0] delay = 0;                                              // Tempo que deve ser esperado até atualizar as coordenadas
 reg startDelay = 0;                                                // Sinal que indica se o delay deve ser iniciado
@@ -24,40 +25,42 @@ reg cor;                                                           // Fio auxili
 assign y_Atual = y_barra;
 
 always @(posedge clk_in) begin                                     // A cada pulso de clock
-    if (clk_en) begin
-      if(refreshBar) begin
-          startDelay <= 1;                                         // Seta variável para iniciar delay
-          if(incDec == 1) begin
-            if((y_barra + 89 + coordY) <= 479)
-              y_barraAux <= y_barra + coordY;                      // Armazena o novo Y para ser usado depois
-          end
-          else begin
-            if((y_barra - coordY) >= 6)
-              y_barraAux <= y_barra - coordY;                     // Armazena o novo Y para ser usado depois
+    if(enablePong) begin
+      if (clk_en) begin
+        if(refreshBar) begin
+            startDelay <= 1;                                         // Seta variável para iniciar delay
+            if(incDec == 1) begin
+              if((y_barra + 89 + coordY) <= 479)
+                y_barraAux <= y_barra + coordY;                      // Armazena o novo Y para ser usado depois
+            end
+            else begin
+              if((y_barra - coordY) >= 6)
+                y_barraAux <= y_barra - coordY;                     // Armazena o novo Y para ser usado depois
+            end
+        end
+      end
+      else begin
+          if(startDelay) begin
+              if(delay == 20'hFFFFF) begin                           // Verifica se o delay já chegou ao final
+                  if(!cor) begin                                     // Caso não esteja escrevendo na tela
+                      startDelay <= 0;                               // Seta variável para finalizar delay
+                      delay <= 0;
+                      y_barra <= y_barraAux;                         // Atualiza valor de Y
+                  end
+              end
+              else delay <= delay + 1'b1;
           end
       end
-    end
-    else begin
-        if(startDelay) begin
-            if(delay == 20'hFFFFF) begin                           // Verifica se o delay já chegou ao final
-                if(!cor) begin                                     // Caso não esteja escrevendo na tela
-                    startDelay <= 0;                               // Seta variável para finalizar delay
-                    delay <= 0;
-                    y_barra <= y_barraAux;                         // Atualiza valor de Y
-                end
-            end
-            else delay <= delay + 1'b1;
-        end
     end
 end
 
 
 always @(posedge clk_in) begin                                     // A cada pulso de clock
-    color <= cor;                                                  // O valor do fio 'cor' é armazenado no registrador 'color'
+     color <= cor;                                                 // O valor do fio 'cor' é armazenado no registrador 'color'
 end
 
 always @(*) begin
-    if(o_active) begin                                             // Caso esteja na área ativa
+    if((o_active == 1) && (enablePong == 1)) begin                 // Caso esteja na área ativa
         if(o_x >= x_barra && o_x <= (x_barra+tamBarraX)) begin     // Verifica se está na posição x da barra para desenhá-la
             if(o_y >= y_barra && o_y <= (y_barra+tamBarraY))       // Verifica se está na posição y da barra para desenhá-la
                 cor = 1;

@@ -41,28 +41,28 @@ loopMoveBar:
 moveUpBar1:
 	# Subir/Descer barra | barra para mover | quantidade p mover
 	#					0										0								000001010
-	movia r17, 0xa
+	movia r17, 0x80a
 	custom 1, r23, r17, r16
 	call loopMoveBar
 
 moveDownBar1:
 	# Subir/Descer barra | barra para mover | quantidade p mover
 	#					1										0								000001010
-	movia r17, 0x40a
+	movia r17, 0xc0a
 	custom 1, r23, r17, r16
 	call loopMoveBar
 
 moveUpBar2:
 	# Subir/Descer barra | barra para mover | quantidade p mover
 	#					0										1								000001010
-	movia r17, 0x20a
+	movia r17, 0xa0a
 	custom 1, r23, r17, r16
 	call loopMoveBar
 
 moveDownBar2:
 	# Subir/Descer barra | barra para mover | quantidade p mover
 	#					1										1								000001010
-	movia r17, 0x60a
+	movia r17, 0xe0a
 	custom 1, r23, r17, r16
 	call loopMoveBar
 
