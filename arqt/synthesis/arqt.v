@@ -11,6 +11,8 @@ module arqt (
 		output wire       lcd_rs_writeresponsevalid_n,     //      lcd_rs.writeresponsevalid_n
 		output wire       lcd_rw_writeresponsevalid_n,     //      lcd_rw.writeresponsevalid_n
 		input  wire       reset_reset_n,                   //       reset.reset_n
+		input  wire       rs232_RXD,                       //       rs232.RXD
+		output wire       rs232_TXD,                       //            .TXD
 		output wire       vga_b_writeresponsevalid_n,      //       vga_b.writeresponsevalid_n
 		output wire       vga_g_writeresponsevalid_n,      //       vga_g.writeresponsevalid_n
 		output wire       vga_hs_writeresponsevalid_n,     //      vga_hs.writeresponsevalid_n
@@ -116,6 +118,13 @@ module arqt (
 	wire         mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read;                            // mm_interconnect_0:jtag_uart_0_avalon_jtag_slave_read -> jtag_uart_0:av_read_n
 	wire         mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write;                           // mm_interconnect_0:jtag_uart_0_avalon_jtag_slave_write -> jtag_uart_0:av_write_n
 	wire  [31:0] mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_writedata;                       // mm_interconnect_0:jtag_uart_0_avalon_jtag_slave_writedata -> jtag_uart_0:av_writedata
+	wire         mm_interconnect_0_rs232_0_avalon_rs232_slave_chipselect;                         // mm_interconnect_0:rs232_0_avalon_rs232_slave_chipselect -> rs232_0:chipselect
+	wire  [31:0] mm_interconnect_0_rs232_0_avalon_rs232_slave_readdata;                           // rs232_0:readdata -> mm_interconnect_0:rs232_0_avalon_rs232_slave_readdata
+	wire   [0:0] mm_interconnect_0_rs232_0_avalon_rs232_slave_address;                            // mm_interconnect_0:rs232_0_avalon_rs232_slave_address -> rs232_0:address
+	wire         mm_interconnect_0_rs232_0_avalon_rs232_slave_read;                               // mm_interconnect_0:rs232_0_avalon_rs232_slave_read -> rs232_0:read
+	wire   [3:0] mm_interconnect_0_rs232_0_avalon_rs232_slave_byteenable;                         // mm_interconnect_0:rs232_0_avalon_rs232_slave_byteenable -> rs232_0:byteenable
+	wire         mm_interconnect_0_rs232_0_avalon_rs232_slave_write;                              // mm_interconnect_0:rs232_0_avalon_rs232_slave_write -> rs232_0:write
+	wire  [31:0] mm_interconnect_0_rs232_0_avalon_rs232_slave_writedata;                          // mm_interconnect_0:rs232_0_avalon_rs232_slave_writedata -> rs232_0:writedata
 	wire  [31:0] mm_interconnect_0_nios2_gen2_0_debug_mem_slave_readdata;                         // nios2_gen2_0:debug_mem_slave_readdata -> mm_interconnect_0:nios2_gen2_0_debug_mem_slave_readdata
 	wire         mm_interconnect_0_nios2_gen2_0_debug_mem_slave_waitrequest;                      // nios2_gen2_0:debug_mem_slave_waitrequest -> mm_interconnect_0:nios2_gen2_0_debug_mem_slave_waitrequest
 	wire         mm_interconnect_0_nios2_gen2_0_debug_mem_slave_debugaccess;                      // mm_interconnect_0:nios2_gen2_0_debug_mem_slave_debugaccess -> nios2_gen2_0:debug_mem_slave_debugaccess
@@ -133,10 +142,13 @@ module arqt (
 	wire         mm_interconnect_0_memoria_s1_clken;                                              // mm_interconnect_0:memoria_s1_clken -> memoria:clken
 	wire  [31:0] mm_interconnect_0_buttons_s1_readdata;                                           // buttons:readdata -> mm_interconnect_0:buttons_s1_readdata
 	wire   [1:0] mm_interconnect_0_buttons_s1_address;                                            // mm_interconnect_0:buttons_s1_address -> buttons:address
-	wire         irq_mapper_receiver0_irq;                                                        // jtag_uart_0:av_irq -> irq_mapper:receiver0_irq
+	wire         irq_mapper_receiver0_irq;                                                        // rs232_0:irq -> irq_mapper:receiver0_irq
+	wire         irq_mapper_receiver1_irq;                                                        // jtag_uart_0:av_irq -> irq_mapper:receiver1_irq
 	wire  [31:0] nios2_gen2_0_irq_irq;                                                            // irq_mapper:sender_irq -> nios2_gen2_0:irq
 	wire         rst_controller_reset_out_reset;                                                  // rst_controller:reset_out -> [buttons:reset_n, irq_mapper:reset, jtag_uart_0:rst_n, memoria:reset, mm_interconnect_0:nios2_gen2_0_reset_reset_bridge_in_reset_reset, nios2_gen2_0:reset_n, rst_translator:in_reset]
 	wire         rst_controller_reset_out_reset_req;                                              // rst_controller:reset_req -> [memoria:reset_req, nios2_gen2_0:reset_req, rst_translator:reset_req_in]
+	wire         rst_controller_001_reset_out_reset;                                              // rst_controller_001:reset_out -> [mm_interconnect_0:rs232_0_reset_reset_bridge_in_reset_reset, rs232_0:reset]
+	wire         nios2_gen2_0_debug_reset_request_reset;                                          // nios2_gen2_0:debug_reset_request -> rst_controller_001:reset_in1
 
 	lcd lcd_0 (
 		.dataa   (nios2_gen2_0_custom_instruction_master_multi_slave_translator0_ci_master_dataa),  // nios_custom_instruction_slave.dataa
@@ -180,7 +192,7 @@ module arqt (
 		.av_write_n     (~mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write),      //                  .write_n
 		.av_writedata   (mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_writedata),   //                  .writedata
 		.av_waitrequest (mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_waitrequest), //                  .waitrequest
-		.av_irq         (irq_mapper_receiver0_irq)                                     //               irq.irq
+		.av_irq         (irq_mapper_receiver1_irq)                                     //               irq.irq
 	);
 
 	arqt_memoria memoria (
@@ -214,7 +226,7 @@ module arqt (
 		.i_readdata                          (nios2_gen2_0_instruction_master_readdata),                   //                          .readdata
 		.i_waitrequest                       (nios2_gen2_0_instruction_master_waitrequest),                //                          .waitrequest
 		.irq                                 (nios2_gen2_0_irq_irq),                                       //                       irq.irq
-		.debug_reset_request                 (),                                                           //       debug_reset_request.reset
+		.debug_reset_request                 (nios2_gen2_0_debug_reset_request_reset),                     //       debug_reset_request.reset
 		.debug_mem_slave_address             (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_address),     //           debug_mem_slave.address
 		.debug_mem_slave_byteenable          (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_byteenable),  //                          .byteenable
 		.debug_mem_slave_debugaccess         (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_debugaccess), //                          .debugaccess
@@ -241,6 +253,21 @@ module arqt (
 		.E_ci_multi_reset_req                (nios2_gen2_0_custom_instruction_master_reset_req),           //                          .reset_req
 		.W_ci_estatus                        (nios2_gen2_0_custom_instruction_master_estatus),             //                          .estatus
 		.W_ci_ipending                       (nios2_gen2_0_custom_instruction_master_ipending)             //                          .ipending
+	);
+
+	arqt_rs232_0 rs232_0 (
+		.clk        (clk_clk),                                                 //                clk.clk
+		.reset      (rst_controller_001_reset_out_reset),                      //              reset.reset
+		.address    (mm_interconnect_0_rs232_0_avalon_rs232_slave_address),    // avalon_rs232_slave.address
+		.chipselect (mm_interconnect_0_rs232_0_avalon_rs232_slave_chipselect), //                   .chipselect
+		.byteenable (mm_interconnect_0_rs232_0_avalon_rs232_slave_byteenable), //                   .byteenable
+		.read       (mm_interconnect_0_rs232_0_avalon_rs232_slave_read),       //                   .read
+		.write      (mm_interconnect_0_rs232_0_avalon_rs232_slave_write),      //                   .write
+		.writedata  (mm_interconnect_0_rs232_0_avalon_rs232_slave_writedata),  //                   .writedata
+		.readdata   (mm_interconnect_0_rs232_0_avalon_rs232_slave_readdata),   //                   .readdata
+		.irq        (irq_mapper_receiver0_irq),                                //          interrupt.irq
+		.UART_RXD   (rs232_RXD),                                               // external_interface.export
+		.UART_TXD   (rs232_TXD)                                                //                   .export
 	);
 
 	altera_customins_master_translator #(
@@ -450,6 +477,7 @@ module arqt (
 	arqt_mm_interconnect_0 mm_interconnect_0 (
 		.clk_0_clk_clk                                  (clk_clk),                                                     //                                clk_0_clk.clk
 		.nios2_gen2_0_reset_reset_bridge_in_reset_reset (rst_controller_reset_out_reset),                              // nios2_gen2_0_reset_reset_bridge_in_reset.reset
+		.rs232_0_reset_reset_bridge_in_reset_reset      (rst_controller_001_reset_out_reset),                          //      rs232_0_reset_reset_bridge_in_reset.reset
 		.nios2_gen2_0_data_master_address               (nios2_gen2_0_data_master_address),                            //                 nios2_gen2_0_data_master.address
 		.nios2_gen2_0_data_master_waitrequest           (nios2_gen2_0_data_master_waitrequest),                        //                                         .waitrequest
 		.nios2_gen2_0_data_master_byteenable            (nios2_gen2_0_data_master_byteenable),                         //                                         .byteenable
@@ -485,13 +513,21 @@ module arqt (
 		.nios2_gen2_0_debug_mem_slave_writedata         (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_writedata),    //                                         .writedata
 		.nios2_gen2_0_debug_mem_slave_byteenable        (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_byteenable),   //                                         .byteenable
 		.nios2_gen2_0_debug_mem_slave_waitrequest       (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_waitrequest),  //                                         .waitrequest
-		.nios2_gen2_0_debug_mem_slave_debugaccess       (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_debugaccess)   //                                         .debugaccess
+		.nios2_gen2_0_debug_mem_slave_debugaccess       (mm_interconnect_0_nios2_gen2_0_debug_mem_slave_debugaccess),  //                                         .debugaccess
+		.rs232_0_avalon_rs232_slave_address             (mm_interconnect_0_rs232_0_avalon_rs232_slave_address),        //               rs232_0_avalon_rs232_slave.address
+		.rs232_0_avalon_rs232_slave_write               (mm_interconnect_0_rs232_0_avalon_rs232_slave_write),          //                                         .write
+		.rs232_0_avalon_rs232_slave_read                (mm_interconnect_0_rs232_0_avalon_rs232_slave_read),           //                                         .read
+		.rs232_0_avalon_rs232_slave_readdata            (mm_interconnect_0_rs232_0_avalon_rs232_slave_readdata),       //                                         .readdata
+		.rs232_0_avalon_rs232_slave_writedata           (mm_interconnect_0_rs232_0_avalon_rs232_slave_writedata),      //                                         .writedata
+		.rs232_0_avalon_rs232_slave_byteenable          (mm_interconnect_0_rs232_0_avalon_rs232_slave_byteenable),     //                                         .byteenable
+		.rs232_0_avalon_rs232_slave_chipselect          (mm_interconnect_0_rs232_0_avalon_rs232_slave_chipselect)      //                                         .chipselect
 	);
 
 	arqt_irq_mapper irq_mapper (
 		.clk           (clk_clk),                        //       clk.clk
 		.reset         (rst_controller_reset_out_reset), // clk_reset.reset
 		.receiver0_irq (irq_mapper_receiver0_irq),       // receiver0.irq
+		.receiver1_irq (irq_mapper_receiver1_irq),       // receiver1.irq
 		.sender_irq    (nios2_gen2_0_irq_irq)            //    sender.irq
 	);
 
@@ -556,6 +592,69 @@ module arqt (
 		.reset_req_in14 (1'b0),                               // (terminated)
 		.reset_in15     (1'b0),                               // (terminated)
 		.reset_req_in15 (1'b0)                                // (terminated)
+	);
+
+	altera_reset_controller #(
+		.NUM_RESET_INPUTS          (2),
+		.OUTPUT_RESET_SYNC_EDGES   ("deassert"),
+		.SYNC_DEPTH                (2),
+		.RESET_REQUEST_PRESENT     (0),
+		.RESET_REQ_WAIT_TIME       (1),
+		.MIN_RST_ASSERTION_TIME    (3),
+		.RESET_REQ_EARLY_DSRT_TIME (1),
+		.USE_RESET_REQUEST_IN0     (0),
+		.USE_RESET_REQUEST_IN1     (0),
+		.USE_RESET_REQUEST_IN2     (0),
+		.USE_RESET_REQUEST_IN3     (0),
+		.USE_RESET_REQUEST_IN4     (0),
+		.USE_RESET_REQUEST_IN5     (0),
+		.USE_RESET_REQUEST_IN6     (0),
+		.USE_RESET_REQUEST_IN7     (0),
+		.USE_RESET_REQUEST_IN8     (0),
+		.USE_RESET_REQUEST_IN9     (0),
+		.USE_RESET_REQUEST_IN10    (0),
+		.USE_RESET_REQUEST_IN11    (0),
+		.USE_RESET_REQUEST_IN12    (0),
+		.USE_RESET_REQUEST_IN13    (0),
+		.USE_RESET_REQUEST_IN14    (0),
+		.USE_RESET_REQUEST_IN15    (0),
+		.ADAPT_RESET_REQUEST       (0)
+	) rst_controller_001 (
+		.reset_in0      (~reset_reset_n),                         // reset_in0.reset
+		.reset_in1      (nios2_gen2_0_debug_reset_request_reset), // reset_in1.reset
+		.clk            (clk_clk),                                //       clk.clk
+		.reset_out      (rst_controller_001_reset_out_reset),     // reset_out.reset
+		.reset_req      (),                                       // (terminated)
+		.reset_req_in0  (1'b0),                                   // (terminated)
+		.reset_req_in1  (1'b0),                                   // (terminated)
+		.reset_in2      (1'b0),                                   // (terminated)
+		.reset_req_in2  (1'b0),                                   // (terminated)
+		.reset_in3      (1'b0),                                   // (terminated)
+		.reset_req_in3  (1'b0),                                   // (terminated)
+		.reset_in4      (1'b0),                                   // (terminated)
+		.reset_req_in4  (1'b0),                                   // (terminated)
+		.reset_in5      (1'b0),                                   // (terminated)
+		.reset_req_in5  (1'b0),                                   // (terminated)
+		.reset_in6      (1'b0),                                   // (terminated)
+		.reset_req_in6  (1'b0),                                   // (terminated)
+		.reset_in7      (1'b0),                                   // (terminated)
+		.reset_req_in7  (1'b0),                                   // (terminated)
+		.reset_in8      (1'b0),                                   // (terminated)
+		.reset_req_in8  (1'b0),                                   // (terminated)
+		.reset_in9      (1'b0),                                   // (terminated)
+		.reset_req_in9  (1'b0),                                   // (terminated)
+		.reset_in10     (1'b0),                                   // (terminated)
+		.reset_req_in10 (1'b0),                                   // (terminated)
+		.reset_in11     (1'b0),                                   // (terminated)
+		.reset_req_in11 (1'b0),                                   // (terminated)
+		.reset_in12     (1'b0),                                   // (terminated)
+		.reset_req_in12 (1'b0),                                   // (terminated)
+		.reset_in13     (1'b0),                                   // (terminated)
+		.reset_req_in13 (1'b0),                                   // (terminated)
+		.reset_in14     (1'b0),                                   // (terminated)
+		.reset_req_in14 (1'b0),                                   // (terminated)
+		.reset_in15     (1'b0),                                   // (terminated)
+		.reset_req_in15 (1'b0)                                    // (terminated)
 	);
 
 endmodule

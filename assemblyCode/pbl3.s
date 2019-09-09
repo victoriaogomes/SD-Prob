@@ -1,50 +1,51 @@
-.equ switches, 0x00003030
+.equ switches, 0x00003010
 .equ delay15ms, 0xF424
 .equ delay4_1ms, 0x42BB
 .equ delay0_1ms, 0x1A0
 .equ delay100ms, 0x65B9A
 .equ delay0_053ms, 0xDC
 .equ delay1s, 0x3F940B
+.equ uart, 0x00003030
 
 .global _start
 
 # r2->Switches
 # r4 -> carrega o valor de botões
 # delay -> r8, r9
-# r11 -> contador
 # r16 -> Escrita na função
 # r17 -> instruções do LCD
-# r18 -> comparação de valores
 # r21 -> escrita player one
 # r22 -> escrita player two
 
 _start:
 	movia r2, switches # Move para r2 o endereço dos switches
 	movia r16, 0x0
+	movia r5, uart # Move para r5 o endereço base da uart
 	movia r14, 0x7
 	movia r20, 0xB
 	movia r10, 0xD
 	movia r12, 0xE
+	call initialize_lcd # Chama a função que inicializa o LCD
 	call loopMoveBar
-#	call turn_led_off # Chama a função que desligará todos os leds
-#	call set_constants # Chama a função que seta as constantes para os delays utilizados
-#	call initialize_lcd # Chama a função que inicializa o LCD
 
 loopMoveBar:
-	ldbio r3, 0(r2)
-	beq r3, r14, moveUpBar1
-	beq r3, r20, moveDownBar1
-	beq r3, r10, moveUpBar2
-	beq r3, r12, moveDownBar2
-	call refreshPoints
+#	ldbio r3, 0(r2)
+# beq r3, r14, moveUpBar1
+#	beq r3, r20, moveDownBar1
+# beq r3, r10, moveUpBar2
+#	beq r3, r12, moveDownBar2
+#	call refreshPoints
+#	call loopMoveBar
+	call read_uart
+	mov r17, r12
+	custom 1, r23, r17, r16
 	call loopMoveBar
 
-refreshPoints:
-	
+# refreshPoints:
 
 moveUpBar1:
-	# Subir/Descer barra | barra para mover | quantidade p mover
-	#					0										0								000001010
+	# barra para mover | quantidade p mover
+	#					0								000001010
 	movia r17, 0x80a
 	custom 1, r23, r17, r16
 	call loopMoveBar
@@ -69,24 +70,6 @@ moveDownBar2:
 	movia r17, 0xe0a
 	custom 1, r23, r17, r16
 	call loopMoveBar
-
-score:
-	ldbio r4, 0(r2) # Carrega o valor do button em r4
-	movia r15, 0x7 # Usa o registrador r15 para carregar os valores que serão comparados para branch
-	beq r4, r15, add_score_player_1 # Caso o botão de descer a seleção seja selecionado, dá branch para atualizar placar
-	movia r15, 0xB # Usa o registrador r15 para carregar os valores que serão comparados para branch
-	beq r4, r15, add_score_player_2 # Caso o botão de descer a seleção seja selecionado, dá branch para atualizar placar
-	addi r22, r22, 1
-	call score
-
-set_constants:
-	movia r11, 0x0 # r11 -> contador, inicializado como 0
-	movia r8, 0xF424 # r8 -> valor para o delay de 15ms
-	movia r9, 0x42BB # r9 -> valor para o delay de 4.1ms
-	movia r10, 0x1A0 # r10 -> valor para o delay de 0.1ms
-	movia r12, 0x65B9A # r12 -> valor para o delay de 100ms
-	movia r13, 0xDC # r13 -> valor para o delay de 0.053ms
-	ret # Retorna para a rotina que chamou essa label
 
 initialize_lcd:
 	addi r27, r27, -4 # Aloca espaço na pilha
@@ -296,3 +279,14 @@ write_score:
 	ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
 	addi r27, r27, 4 # Desalocando espaço na pilha
 ret # Retorna para a rotina que chamou essa label
+
+# ------------------------------------------ LÊ r12 DA UART --------------------------------------------------------------------------- #
+read_uart:
+	get_char:
+		ldwio r12, 0(r5) # Lê o registrador de dados do JTAG UART, armazenado em r5
+		andi r13, r12, 0x8000 # Checa se chegou algum dado novo
+		beq r13, r0, get_char # Se não chegou, irá tentar ler novamente
+	andi r13, r12, 0x00ff # O dado novo estará no bit menos significativo
+	mov r12, r13 # Coloco em r12 o dado que preciso retornar
+#	bne r12, r10, get_char # Caso o caractere não seja "K", tento ler novamente
+	ret

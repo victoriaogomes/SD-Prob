@@ -9,9 +9,11 @@
 			reset_reset_n                   : in  std_logic                    := 'X';             -- reset_n
 			vga_b_writeresponsevalid_n      : out std_logic;                                       -- writeresponsevalid_n
 			vga_g_writeresponsevalid_n      : out std_logic;                                       -- writeresponsevalid_n
-			vga_r_writeresponsevalid_n      : out std_logic;                                       -- writeresponsevalid_n
 			vga_hs_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
-			vga_vs_writeresponsevalid_n     : out std_logic                                        -- writeresponsevalid_n
+			vga_r_writeresponsevalid_n      : out std_logic;                                       -- writeresponsevalid_n
+			vga_vs_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
+			rs232_RXD                       : in  std_logic                    := 'X';             -- RXD
+			rs232_TXD                       : out std_logic                                        -- TXD
 		);
 	end component arqt;
 
@@ -26,8 +28,10 @@
 			reset_reset_n                   => CONNECTED_TO_reset_reset_n,                   --       reset.reset_n
 			vga_b_writeresponsevalid_n      => CONNECTED_TO_vga_b_writeresponsevalid_n,      --       vga_b.writeresponsevalid_n
 			vga_g_writeresponsevalid_n      => CONNECTED_TO_vga_g_writeresponsevalid_n,      --       vga_g.writeresponsevalid_n
-			vga_r_writeresponsevalid_n      => CONNECTED_TO_vga_r_writeresponsevalid_n,      --       vga_r.writeresponsevalid_n
 			vga_hs_writeresponsevalid_n     => CONNECTED_TO_vga_hs_writeresponsevalid_n,     --      vga_hs.writeresponsevalid_n
-			vga_vs_writeresponsevalid_n     => CONNECTED_TO_vga_vs_writeresponsevalid_n      --      vga_vs.writeresponsevalid_n
+			vga_r_writeresponsevalid_n      => CONNECTED_TO_vga_r_writeresponsevalid_n,      --       vga_r.writeresponsevalid_n
+			vga_vs_writeresponsevalid_n     => CONNECTED_TO_vga_vs_writeresponsevalid_n,     --      vga_vs.writeresponsevalid_n
+			rs232_RXD                       => CONNECTED_TO_rs232_RXD,                       --       rs232.RXD
+			rs232_TXD                       => CONNECTED_TO_rs232_TXD                        --            .TXD
 		);
 

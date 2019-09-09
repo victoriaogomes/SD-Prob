@@ -1,5 +1,5 @@
 Assembler report for problema3
-Fri Sep 06 10:02:15 2019
+Mon Sep 09 17:18:51 2019
 Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Lite Edition
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Sep 06 10:02:15 2019 ;
+; Assembler Status      ; Successful - Mon Sep 09 17:18:51 2019 ;
 ; Revision Name         ; problema3                             ;
 ; Top-level Entity Name ; problema3                             ;
 ; Family                ; Cyclone IV E                          ;
@@ -79,8 +79,8 @@ agreement for further details.
 ; Option         ; Setting                                                              ;
 +----------------+----------------------------------------------------------------------+
 ; Device         ; EP4CE6E22C8                                                          ;
-; JTAG usercode  ; 0x0022E0B0                                                           ;
-; Checksum       ; 0x0022E0B0                                                           ;
+; JTAG usercode  ; 0x00252DDA                                                           ;
+; Checksum       ; 0x00252DDA                                                           ;
 +----------------+----------------------------------------------------------------------+
 
 
@@ -90,14 +90,14 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 16.1.2 Build 203 01/18/2017 SJ Lite Edition
-    Info: Processing started: Fri Sep 06 10:02:13 2019
+    Info: Processing started: Mon Sep 09 17:18:49 2019
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off problema3 -c problema3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4702 megabytes
-    Info: Processing ended: Fri Sep 06 10:02:15 2019
+    Info: Peak virtual memory: 4703 megabytes
+    Info: Processing ended: Mon Sep 09 17:18:51 2019
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

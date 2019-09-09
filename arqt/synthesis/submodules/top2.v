@@ -22,9 +22,7 @@ module top2(
     reg enableGame = 0;         // Indica se o jogo está rolando ou não
 
     reg [8:0] yBar1;            // Registrador para armazenar o novo valor da posição y da barra 1
-    reg incDecBar1;             // Bit para indicar se a posição da barra 1 deve ser incrementada (1) ou decrementada (0)
     reg [8:0] yBar2;            // Registrador para armazenar o novo valor da posição y da barra 2
-    reg incDecBar2;             // Bit para indicar se a posição da barra 2 deve ser incrementada (1) ou decrementada (0)
 
     reg [15:0] cnt;
     reg pix_stb;
@@ -58,7 +56,6 @@ module top2(
       .clk_in(pix_stb),         // Clock da FPGA
       .clk_en(CLK_EN),          // Clock Enable
       .i_rst(RST_BTN),          // Botão de reset
-      .incDec(incDecBar1),      // Indica se a posição da barra deve ser incrementada ou decrementada
       .o_active(activeArea),    // Indicador de área ativa
       .o_x(x),                  // Posição x atual do pixel
       .o_y(y),                  // Posição y atual do pixel
@@ -73,7 +70,6 @@ module top2(
       .clk_in(pix_stb),         // Clock da FPGA
       .clk_en(CLK_EN),          // Clock Enable
       .i_rst(RST_BTN),          // Botão de reset
-      .incDec(incDecBar2),      // Indica se a posição da barra deve ser incrementada ou decrementada
       .o_active(activeArea),    // Indicador de área ativa
       .o_x(x),                  // Posição x atual do pixel
       .o_y(y),                  // Posição y atual do pixel
@@ -96,23 +92,27 @@ module top2(
         .color(selectColors[3])   // Saída para indicar a cor do que deve ser escrito
     );
 
+    /*      31:17    |    16    |     15:1     | 0
+        pointPlayer1 | Dirty bit| pointPlayer2 | Dirty bit
+    */
+
+    always @ (negedge RST_BTN) begin
+      enableGame = 1;
+    end
+
     always @(posedge CLK_EN) begin
       if(enableGame) begin
         if(dataa[9] == 0) begin
           yBar1 <= dataa[8:0];
-          incDecBar1 <= dataa[10];
           refreshBar1 <= 1;
           refreshBar2 <= 0;
         end
         else begin
           yBar2 <= dataa[8:0];
-          incDecBar2 <= dataa[10];
           refreshBar1 <= 0;
           refreshBar2 <= 1;
         end
       end
-      else enableGame <= dataa[11];
-      if (RST_BTN) enableGame <= 0;
     end
 
 

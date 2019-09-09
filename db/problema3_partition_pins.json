@@ -28,6 +28,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "tx",
+					"strict" : false
+				},
+				{
 					"name" : "display[7]",
 					"strict" : false
 				},
@@ -64,6 +68,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
 					"name" : "buttons[0]",
 					"strict" : false
 				},
@@ -80,7 +88,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "rx",
 					"strict" : false
 				},
 				{

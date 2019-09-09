@@ -69,7 +69,6 @@ set_location_assignment PIN_7 -to display[6]
 set_location_assignment PIN_11 -to display[7]
 set_location_assignment PIN_143 -to enable
 set_location_assignment PIN_141 -to lcd_rs
-set_location_assignment PIN_138 -to lcd_rw
 set_location_assignment PIN_25 -to reset
 set_location_assignment PIN_104 -to vga_b
 set_location_assignment PIN_105 -to vga_g
@@ -85,4 +84,6 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_location_assignment PIN_114 -to tx
+set_location_assignment PIN_115 -to rx
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
