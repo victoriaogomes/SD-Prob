@@ -32,6 +32,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "tx2",
+					"strict" : false
+				},
+				{
 					"name" : "display[7]",
 					"strict" : false
 				},
@@ -89,6 +93,10 @@
 				},
 				{
 					"name" : "rx",
+					"strict" : false
+				},
+				{
+					"name" : "rx2",
 					"strict" : false
 				},
 				{

@@ -2,7 +2,7 @@ module top2(
     input wire CLK,             // Clock da placa
     input wire CLK_EN,          // Clock para habilitar a instrução customizada
     input wire [31:0] dataa,    // Entrada para envio de coordenadas de y da barra 1 e 2
-    input  wire RST_BTN,        // Botão de reset
+    input  wire resentinho,        // Botão de reset
     output wire [31:0] result,  // Output que irá fornecer a pontuação do jogador
     output wire VGA_HS_O,       // Output do sinal horizontal
     output wire VGA_VS_O,       // Output do sinal vertical
@@ -12,6 +12,7 @@ module top2(
     );
 
     wire [9:0] x;               // Posição x atual do pixel: 10-bit value: 0-1023
+    wire RST_BTN;
     wire [8:0] y;               // Posição x atual do pixel:  9-bit value: 0-511
     wire activeArea;            // Armazena se um pixel está sendo desenhado (área ativa)
     wire selectColors[3:0];     // Fios para informar se a cor do desenho da barra 1/2, da bolinha ou do menu será azul ou roxo
@@ -20,6 +21,7 @@ module top2(
     wire [8:0] barra1Atual;     // Informa a posição atual da barra 1 no eixo y
     wire [8:0] barra2Atual;     // Informa a posição atual da barra 2 no eixo y
     reg enableGame = 0;         // Indica se o jogo está rolando ou não
+    assign RST_BTN = ~resentinho;
 
     reg [8:0] yBar1;            // Registrador para armazenar o novo valor da posição y da barra 1
     reg [8:0] yBar2;            // Registrador para armazenar o novo valor da posição y da barra 2
@@ -96,12 +98,13 @@ module top2(
         pointPlayer1 | Dirty bit| pointPlayer2 | Dirty bit
     */
 
-    always @ (negedge RST_BTN) begin
-      enableGame = 1;
+    always @ (posedge CLK) begin
+      if (RST_BTN)
+        enableGame <= 1;
     end
 
     always @(posedge CLK_EN) begin
-      if(enableGame) begin
+      if(enableGame == 1) begin
         if(dataa[9] == 0) begin
           yBar1 <= dataa[8:0];
           refreshBar1 <= 1;

@@ -7,8 +7,11 @@
 			lcd_rs_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
 			lcd_rw_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n
 			reset_reset_n                   : in  std_logic                    := 'X';             -- reset_n
+			resetfpga_beginbursttransfer    : in  std_logic                    := 'X';             -- beginbursttransfer
 			rs232_RXD                       : in  std_logic                    := 'X';             -- RXD
 			rs232_TXD                       : out std_logic;                                       -- TXD
+			rs232_1_RXD                     : in  std_logic                    := 'X';             -- RXD
+			rs232_1_TXD                     : out std_logic;                                       -- TXD
 			vga_b_writeresponsevalid_n      : out std_logic;                                       -- writeresponsevalid_n
 			vga_g_writeresponsevalid_n      : out std_logic;                                       -- writeresponsevalid_n
 			vga_hs_writeresponsevalid_n     : out std_logic;                                       -- writeresponsevalid_n

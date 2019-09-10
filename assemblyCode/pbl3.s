@@ -5,12 +5,12 @@
 .equ delay100ms, 0x65B9A
 .equ delay0_053ms, 0xDC
 .equ delay1s, 0x3F940B
-.equ uart, 0x00003040
+.equ uart1, 0x00003040
+.equ uart2, 0x00003038
 
 .global _start
 
 # r2->Switches
-# r4 -> carrega o valor de botões
 # delay -> r8, r9
 # r16 -> Escrita na função
 # r17 -> instruções do LCD
@@ -20,7 +20,8 @@
 _start:
 	movia r2, switches # Move para r2 o endereço dos switches
 	movia r16, 0x0
-	movia r5, uart # Move para r5 o endereço base da uart
+	movia r4, uart2 # Move para r4 o endereço base da uart
+	movia r5, uart1 # Move para r5 o endereço base da uart
 	movia r14, 0x7
 	movia r20, 0xB
 	movia r10, 0xD
@@ -29,45 +30,13 @@ _start:
 	call loopMoveBar
 
 loopMoveBar:
-#	ldbio r3, 0(r2)
-# beq r3, r14, moveUpBar1
-#	beq r3, r20, moveDownBar1
-# beq r3, r10, moveUpBar2
-#	beq r3, r12, moveDownBar2
-#	call refreshPoints
-#	call loopMoveBar
-	call read_uart
-	mov r17, r12
+	call read_uart1
+	movia r17, 0x2
+	sll r17, r12, r17
 	custom 1, r23, r17, r16
-	call loopMoveBar
-
-# refreshPoints:
-
-moveUpBar1:
-	# barra para mover | quantidade p mover
-	#					0								000001010
-	movia r17, 0x80a
-	custom 1, r23, r17, r16
-	call loopMoveBar
-
-moveDownBar1:
-	# Subir/Descer barra | barra para mover | quantidade p mover
-	#					1										0								000001010
-	movia r17, 0xc0a
-	custom 1, r23, r17, r16
-	call loopMoveBar
-
-moveUpBar2:
-	# Subir/Descer barra | barra para mover | quantidade p mover
-	#					0										1								000001010
-	movia r17, 0xa0a
-	custom 1, r23, r17, r16
-	call loopMoveBar
-
-moveDownBar2:
-	# Subir/Descer barra | barra para mover | quantidade p mover
-	#					1										1								000001010
-	movia r17, 0xe0a
+	call read_uart2
+	movia r17, 0x2
+	sll r17, r12, r17
 	custom 1, r23, r17, r16
 	call loopMoveBar
 
@@ -281,11 +250,21 @@ write_score:
 ret # Retorna para a rotina que chamou essa label
 
 # ------------------------------------------ LÊ r12 DA UART --------------------------------------------------------------------------- #
-read_uart:
+read_uart1:
 	get_char:
 		ldwio r12, 0(r5) # Lê o registrador de dados do JTAG UART, armazenado em r5
 		andi r13, r12, 0x8000 # Checa se chegou algum dado novo
 		beq r13, r0, get_char # Se não chegou, irá tentar ler novamente
+	andi r13, r12, 0x00ff # O dado novo estará no bit menos significativo
+	mov r12, r13 # Coloco em r12 o dado que preciso retornar
+#	bne r12, r10, get_char # Caso o caractere não seja "K", tento ler novamente
+	ret
+
+read_uart2:
+	get_char2:
+		ldwio r12, 0(r4) # Lê o registrador de dados do JTAG UART, armazenado em r5
+		andi r13, r12, 0x8000 # Checa se chegou algum dado novo
+		beq r13, r0, get_char2 # Se não chegou, irá tentar ler novamente
 	andi r13, r12, 0x00ff # O dado novo estará no bit menos significativo
 	mov r12, r13 # Coloco em r12 o dado que preciso retornar
 #	bne r12, r10, get_char # Caso o caractere não seja "K", tento ler novamente
