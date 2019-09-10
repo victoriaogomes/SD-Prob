@@ -38,6 +38,7 @@ loopMoveBar:
 	movia r17, 0x2
 	sll r17, r12, r17
 	custom 1, r23, r17, r16
+	# call write_score
 	call loopMoveBar
 
 initialize_lcd:
@@ -213,41 +214,42 @@ write:
 	addi r27, r27, 4 # Desalocando espaço na pilha
 	ret # Retorna para a rotina que chamou essa label
 
-# -------------- Adiciona 1 ao score do player 1 ----------------#
-
-add_score_player_1:
-  addi r27, r27, -4 # Aloca espaço na pilha
-  stw r31, 0(r27) # Salva na pilha o endereço para o qual deverá voltar após executar os procedimetos seguintes
-  addi r21, r21, 1 # Aumenta o placar do jogador 1 em um ponto
-  call write_score # Chama a função que escreve o placar na LCD
-  ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
-	addi r27, r27, 4 # Desalocando espaço na pilha
-ret
-
-# -------------- Soma 1 no score 2 ----------------#
-
-add_score_player_2:
-  addi r27, r27, -4 # Aloca espaço na pilha
-  stw r31, 0(r27) # Salva na pilha o endereço para o qual deverá voltar após executar os procedimetos seguintes
-  addi r22, r22, 1 # Aumenta o placar do jogador 2 em um ponto
-  call write_score # Chama a função que escreve o placar na LCD
-  ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
-	addi r27, r27, 4 # Desalocando espaço na pilha
-ret
 
 # -------------- Escreve o placar no LCD ----------------#
 write_score:
 	addi r27, r27, -4 # Aloca espaço na pilha
 	stw r31, 0(r27) # Salva na pilha o endereço para o qual deverá voltar após executar os procedimetos seguintes
-	mov r16, r21 # Placar do jogador 1
+	movia r17, 0x2
+	sra r16, r23, r17 # Placar do jogador 1
 	call write # Escreve o valor armazenado no registrador de r16
 	movia r16, 0x58 # Caractere X
 	call write # Escreve o valor armazenado no registrador de r16
-	mov r16, r22 # Placar do jogador 2
+	movia r17, 0x1E
+	sll r16, r23, r17
+	sra r16, r16, r17 # Placar do jogador 2
 	call write # Escreve o valor armazenado no registrador de r16
 	ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
 	addi r27, r27, 4 # Desalocando espaço na pilha
 ret # Retorna para a rotina que chamou essa label
+
+chooseHex:
+	movia r7, 0x1
+	beq r16, r7, umPonto
+	movia r7, 0x2
+	beq r16, r7, doisPontos
+	movia r7, 0x3
+	beq r16, r7, tresPontos
+	movia r16, 0x30
+	ret
+	umPonto:
+		movia r16, 0x31
+		ret
+	doisPontos:
+		movia r16, 0x32
+		ret
+	tresPontos:
+		movia r16, 0x33
+		ret
 
 # ------------------------------------------ LÊ r12 DA UART --------------------------------------------------------------------------- #
 read_uart1:
