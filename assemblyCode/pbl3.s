@@ -5,7 +5,7 @@
 .equ delay100ms, 0x65B9A
 .equ delay0_053ms, 0xDC
 .equ delay1s, 0x3F940B
-.equ uart, 0x00003030
+.equ uart, 0x00003040
 
 .global _start
 
