@@ -104,7 +104,7 @@ module top2(
 
     always @(posedge CLK_EN) begin
       if(enableGame == 1) begin
-        if(dataa[9] == 0) begin
+        if(dataa[9] == 1) begin
           yBar1 <= dataa[8:0];
           refreshBar1 <= 1;
           refreshBar2 <= 0;

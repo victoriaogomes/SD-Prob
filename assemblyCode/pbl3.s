@@ -19,28 +19,24 @@
 
 _start:
 	movia r2, switches # Move para r2 o endereço dos switches
-	movia r16, 0x0
 	movia r4, uart2 # Move para r4 o endereço base da uart
 	movia r5, uart1 # Move para r5 o endereço base da uart
-	movia r14, 0x7
-	movia r20, 0xB
-	movia r10, 0xD
-	movia r12, 0xE
 	call initialize_lcd # Chama a função que inicializa o LCD
 	call loopMoveBar
 
 loopMoveBar:
 	call read_uart1
-	movia r17, 0x2
-	sll r17, r12, r17
-	custom 1, r23, r17, r16
+	movia r18, 0x2
+	sll r18, r12, r18
+	custom 1, r23, r18, r16
 	call read_uart2
-	movia r17, 0x2
-	sll r17, r12, r17
-	custom 1, r23, r17, r16
+	movia r18, 0x2
+	sll r18, r12, r18
+	custom 1, r23, r18, r16
 	# call write_score
 	call loopMoveBar
 
+# --------------------------------------------   INICIALIZAÇÃO DO LCD ----------------------------------------------- #
 initialize_lcd:
 	addi r27, r27, -4 # Aloca espaço na pilha
 	stw r31, 0(r27) # Salva na pilha o endereço para o qual deverá voltar após executar os procedimetos seguintes
@@ -219,18 +215,23 @@ write:
 write_score:
 	addi r27, r27, -4 # Aloca espaço na pilha
 	stw r31, 0(r27) # Salva na pilha o endereço para o qual deverá voltar após executar os procedimetos seguintes
-	movia r17, 0x2
-	sra r16, r23, r17 # Placar do jogador 1
+	mov r24, r23
+	call clear_lcd
+	call line_one
+	movia r21, 0x2
+	sra r16, r24, r21 # Placar do jogador 1
+	call chooseHex
 	call write # Escreve o valor armazenado no registrador de r16
 	movia r16, 0x58 # Caractere X
 	call write # Escreve o valor armazenado no registrador de r16
-	movia r17, 0x1E
-	sll r16, r23, r17
-	sra r16, r16, r17 # Placar do jogador 2
+	movia r21, 0x1E
+	sll r16, r24, r21
+	sra r16, r16, r21 # Placar do jogador 2
+	call chooseHex
 	call write # Escreve o valor armazenado no registrador de r16
 	ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
 	addi r27, r27, 4 # Desalocando espaço na pilha
-ret # Retorna para a rotina que chamou essa label
+	ret # Retorna para a rotina que chamou essa label
 
 chooseHex:
 	movia r7, 0x1
@@ -259,7 +260,6 @@ read_uart1:
 		beq r13, r0, get_char # Se não chegou, irá tentar ler novamente
 	andi r13, r12, 0x00ff # O dado novo estará no bit menos significativo
 	mov r12, r13 # Coloco em r12 o dado que preciso retornar
-#	bne r12, r10, get_char # Caso o caractere não seja "K", tento ler novamente
 	ret
 
 read_uart2:
@@ -269,5 +269,4 @@ read_uart2:
 		beq r13, r0, get_char2 # Se não chegou, irá tentar ler novamente
 	andi r13, r12, 0x00ff # O dado novo estará no bit menos significativo
 	mov r12, r13 # Coloco em r12 o dado que preciso retornar
-#	bne r12, r10, get_char # Caso o caractere não seja "K", tento ler novamente
 	ret

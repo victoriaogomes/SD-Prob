@@ -91,7 +91,7 @@ module top2(
         .pos_yBarra1(barra1Atual),// Posição y atual da barra 1
         .pos_yBarra2(barra2Atual),// Posição y atual da barra 2
         .enablePong(enableGame),  // Indica se o jogo está habilitado ou não
-        .pointPlayers(result), // Pontuação do jogador 1 e 2
+        .pointPlayers(result),    // Pontuação do jogador 1 e 2
         .color(selectColors[3])   // Saída para indicar a cor do que deve ser escrito
     );
 
@@ -104,7 +104,7 @@ module top2(
 
     always @(posedge CLK_EN) begin
       if(enableGame == 1) begin
-        if(dataa[9] == 0) begin
+        if(dataa[9] == 1) begin
           yBar1 <= dataa[8:0];
           refreshBar1 <= 1;
           refreshBar2 <= 0;
