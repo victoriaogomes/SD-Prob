@@ -2,13 +2,18 @@ module top2(
     input wire CLK,               // Clock da placa
     input wire CLK_EN,            // Clock para habilitar a instrução customizada
     input wire [31:0] dataa,      // Entrada para envio de coordenadas de y da barra 1 e 2
+    input wire [31:0] datab,      // Entrada para ser utilizada pelo LCD
     input  wire resentinho,       // Botão de reset
     output wire [31:0] result,    // Output que irá fornecer a pontuação do jogador
     output wire VGA_HS_O,         // Output do sinal horizontal
     output wire VGA_VS_O,         // Output do sinal vertical
     output reg VGA_R,             // Output red da VGA de 1-bit
     output reg VGA_G,             // Output green da VGA de 1-bit
-    output reg VGA_B              // Output blue da VGA de 1-bit
+    output reg VGA_B,             // Output blue da VGA de 1-bit
+    output wire rwPin,            // Pino rw do LCD
+    output wire rsPin,            // Pino rs do LCD
+    output wire enablePin,        // Pino enable do LCD
+    output wire [7:0] displayData // Pino de dados do LCD
     );
 
     wire [9:0] x;                 // Posição x atual do pixel: 10-bit value: 0-1023
@@ -22,6 +27,8 @@ module top2(
     wire [8:0] barra2Atual;       // Informa a posição atual da barra 2 no eixo y
     reg enableGame = 0;           // Indica se o jogo está rolando ou não
     assign RST_BTN = ~resentinho;
+    wire enableWrite;
+    wire [31:0] placar;
 
     reg [8:0] yBar1;              // Registrador para armazenar o novo valor da posição y da barra 1
     reg [8:0] yBar2;              // Registrador para armazenar o novo valor da posição y da barra 2
@@ -50,8 +57,20 @@ module top2(
         .o_active(activeArea),    // Alto quando um pixel está sendo desenhado
         .o_x(x),                  // Posição x atual do pixel
         .o_y(y),                  // Posição y atual do pixel
-        .enablePong(enableGame),
+        .enablePong(enableGame),  // Indica se o jogo está rodando ou não
         .color(selectColors[0])   // Indica se está imprimindo ou não (1 imprimindo, 0 não)
+    );
+
+    lcd score (
+        .dado(datab[7:0]),        // Dados/instruções para serem enviadas ao LCD
+        .clk(CLK),                // Clock da placa
+        .clk_en(CLK_EN),          // Clock para habilitar a instrução customizada
+        .placarToWrite(placar),   // Placar a ser escrito na LCD
+        .writePlacar(enableWrite),// Informa se o placar deve ser printado ou não
+        .rw(rwPin),               // Pino do LCD que indica escrita/leitura
+        .rs(rsPin),               // Pino que indica se estão sendo enviadas instruções ou dados
+        .en(enablePin),           // Pino de enable do LCD
+        .display(displayData)     // Saída de dados para o LCD
     );
 
     printBar printBar_1 (
@@ -88,6 +107,8 @@ module top2(
         .o_active(activeArea),    // Indicador de área ativa
         .o_x(x),                  // Posição x atual do pixel
         .o_y(y),                  // Posição y atual do pixel
+        .placarWrite(placar),     // Placar a ser escrito na LCD
+        .enablePlacar(enableWrite),// Informa se o placar deve ser printado ou não
         .pos_yBarra1(barra1Atual),// Posição y atual da barra 1
         .pos_yBarra2(barra2Atual),// Posição y atual da barra 2
         .enablePong(enableGame),  // Indica se o jogo está habilitado ou não

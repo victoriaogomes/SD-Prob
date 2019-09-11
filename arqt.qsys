@@ -9,7 +9,7 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
-   element LCD_0
+   element VGA_0
    {
       datum _sortIndex
       {
@@ -17,12 +17,12 @@
          type = "int";
       }
    }
-   element VGA_0
+   element arqt
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "6";
-         type = "int";
+         value = "Cyclone IV E";
+         type = "String";
       }
    }
    element arqt
@@ -165,7 +165,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "6";
          type = "int";
       }
    }
@@ -181,7 +181,7 @@
    {
       datum _sortIndex
       {
-         value = "8";
+         value = "7";
          type = "int";
       }
    }
@@ -220,14 +220,13 @@
    type="conduit"
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
- <interface name="lcd_display" internal="LCD_0.display" type="conduit" dir="end" />
- <interface name="lcd_enable" internal="LCD_0.enable" type="conduit" dir="end" />
- <interface name="lcd_rs" internal="LCD_0.rs" type="conduit" dir="end" />
- <interface name="lcd_rw" internal="LCD_0.rw" type="conduit" dir="end" />
+ <interface name="display" internal="VGA_0.display" type="conduit" dir="end" />
+ <interface name="enablelcd" internal="VGA_0.enable" type="conduit" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface name="reset_1" internal="VGA_0.conduit_end_1" />
  <interface name="reset_fpga" internal="VGA_0.conduit_end" />
  <interface name="resetfpga" internal="VGA_0.resetFPGA" type="conduit" dir="end" />
+ <interface name="rs" internal="VGA_0.rs" type="conduit" dir="end" />
  <interface
    name="rs232"
    internal="rs232_0.external_interface"
@@ -238,12 +237,12 @@
    internal="rs232_1.external_interface"
    type="conduit"
    dir="end" />
+ <interface name="rw" internal="VGA_0.rw" type="conduit" dir="end" />
  <interface name="vga_b" internal="VGA_0.VGA_B" type="conduit" dir="end" />
  <interface name="vga_g" internal="VGA_0.VGA_G" type="conduit" dir="end" />
  <interface name="vga_hs" internal="VGA_0.HS" type="conduit" dir="end" />
  <interface name="vga_r" internal="VGA_0.VGA_R" type="conduit" dir="end" />
  <interface name="vga_vs" internal="VGA_0.VS" type="conduit" dir="end" />
- <module name="LCD_0" kind="LCD" version="1.0" enabled="1" />
  <module name="VGA_0" kind="VGA" version="1.0" enabled="1" />
  <module name="buttons" kind="altera_avalon_pio" version="16.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -333,7 +332,7 @@
   <parameter name="cpuArchRev" value="1" />
   <parameter name="cpuID" value="0" />
   <parameter name="cpuReset" value="false" />
-  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="lcd_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="vga_0" baseAddress="1" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
+  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="vga_0" baseAddress="1" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
   <parameter name="customInstSlavesSystemInfo_nios_a" value="&lt;info/&gt;" />
   <parameter name="customInstSlavesSystemInfo_nios_b" value="&lt;info/&gt;" />
   <parameter name="customInstSlavesSystemInfo_nios_c" value="&lt;info/&gt;" />
@@ -660,15 +659,6 @@
    start="nios2_gen2_0.irq"
    end="jtag_uart_0.irq">
   <parameter name="irqNumber" value="0" />
- </connection>
- <connection
-   kind="nios_custom_instruction"
-   version="16.1"
-   start="nios2_gen2_0.custom_instruction_master"
-   end="LCD_0.nios_custom_instruction_slave">
-  <parameter name="CIName" value="lcd_0" />
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0" />
  </connection>
  <connection
    kind="nios_custom_instruction"

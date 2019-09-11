@@ -2,11 +2,8 @@
 module arqt (
 	buttons_export,
 	clk_clk,
-	lcd_display_readdata,
-	lcd_enable_writeresponsevalid_n,
-	lcd_rs_writeresponsevalid_n,
-	lcd_rw_writeresponsevalid_n,
 	reset_reset_n,
+	resetfpga_beginbursttransfer,
 	rs232_RXD,
 	rs232_TXD,
 	rs232_1_RXD,
@@ -16,15 +13,15 @@ module arqt (
 	vga_hs_writeresponsevalid_n,
 	vga_r_writeresponsevalid_n,
 	vga_vs_writeresponsevalid_n,
-	resetfpga_beginbursttransfer);	
+	rw_writeresponsevalid_n,
+	rs_writeresponsevalid_n,
+	enablelcd_writeresponsevalid_n,
+	display_readdata);	
 
 	input	[3:0]	buttons_export;
 	input		clk_clk;
-	output	[7:0]	lcd_display_readdata;
-	output		lcd_enable_writeresponsevalid_n;
-	output		lcd_rs_writeresponsevalid_n;
-	output		lcd_rw_writeresponsevalid_n;
 	input		reset_reset_n;
+	input		resetfpga_beginbursttransfer;
 	input		rs232_RXD;
 	output		rs232_TXD;
 	input		rs232_1_RXD;
@@ -34,5 +31,8 @@ module arqt (
 	output		vga_hs_writeresponsevalid_n;
 	output		vga_r_writeresponsevalid_n;
 	output		vga_vs_writeresponsevalid_n;
-	input		resetfpga_beginbursttransfer;
+	output		rw_writeresponsevalid_n;
+	output		rs_writeresponsevalid_n;
+	output		enablelcd_writeresponsevalid_n;
+	output	[7:0]	display_readdata;
 endmodule
