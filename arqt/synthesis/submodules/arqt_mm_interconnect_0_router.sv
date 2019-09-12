@@ -44,10 +44,10 @@
 
 module arqt_mm_interconnect_0_router_default_decode
   #(
-     parameter DEFAULT_CHANNEL = 4,
+     parameter DEFAULT_CHANNEL = 5,
                DEFAULT_WR_CHANNEL = -1,
                DEFAULT_RD_CHANNEL = -1,
-               DEFAULT_DESTID = 2 
+               DEFAULT_DESTID = 1 
    )
   (output [76 - 74 : 0] default_destination_id,
    output [6-1 : 0] default_wr_channel,
@@ -136,16 +136,16 @@ module arqt_mm_interconnect_0_router
     // -------------------------------------------------------
     localparam PAD0 = log2ceil(64'h2000 - 64'h0); 
     localparam PAD1 = log2ceil(64'h3000 - 64'h2800); 
-    localparam PAD2 = log2ceil(64'h3020 - 64'h3010); 
-    localparam PAD3 = log2ceil(64'h3040 - 64'h3038); 
-    localparam PAD4 = log2ceil(64'h3048 - 64'h3040); 
-    localparam PAD5 = log2ceil(64'h3050 - 64'h3048); 
+    localparam PAD2 = log2ceil(64'h3048 - 64'h3040); 
+    localparam PAD3 = log2ceil(64'h3050 - 64'h3048); 
+    localparam PAD4 = log2ceil(64'h3058 - 64'h3050); 
+    localparam PAD5 = log2ceil(64'h3060 - 64'h3058); 
     // -------------------------------------------------------
     // Work out which address bits are significant based on the
     // address range of the slaves. If the required width is too
     // large or too small, we use the address field width instead.
     // -------------------------------------------------------
-    localparam ADDR_RANGE = 64'h3050;
+    localparam ADDR_RANGE = 64'h3060;
     localparam RANGE_ADDR_WIDTH = log2ceil(ADDR_RANGE);
     localparam OPTIMIZED_ADDR_H = (RANGE_ADDR_WIDTH > PKT_ADDR_W) ||
                                   (RANGE_ADDR_WIDTH == 0) ?
@@ -174,11 +174,6 @@ module arqt_mm_interconnect_0_router
 
 
 
-    // -------------------------------------------------------
-    // Write and read transaction signals
-    // -------------------------------------------------------
-    wire read_transaction;
-    assign read_transaction  = sink_data[PKT_TRANS_READ];
 
 
     arqt_mm_interconnect_0_router_default_decode the_default_decode(
@@ -200,38 +195,38 @@ module arqt_mm_interconnect_0_router
 
     // ( 0x0 .. 0x2000 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 14'h0   ) begin
-            src_channel = 6'b010000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
+            src_channel = 6'b100000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
     end
 
     // ( 0x2800 .. 0x3000 )
     if ( {address[RG:PAD1],{PAD1{1'b0}}} == 14'h2800   ) begin
-            src_channel = 6'b001000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
-    end
-
-    // ( 0x3010 .. 0x3020 )
-    if ( {address[RG:PAD2],{PAD2{1'b0}}} == 14'h3010  && read_transaction  ) begin
-            src_channel = 6'b100000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
-    end
-
-    // ( 0x3038 .. 0x3040 )
-    if ( {address[RG:PAD3],{PAD3{1'b0}}} == 14'h3038   ) begin
-            src_channel = 6'b000100;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 5;
+            src_channel = 6'b010000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
     end
 
     // ( 0x3040 .. 0x3048 )
-    if ( {address[RG:PAD4],{PAD4{1'b0}}} == 14'h3040   ) begin
-            src_channel = 6'b000010;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
+    if ( {address[RG:PAD2],{PAD2{1'b0}}} == 14'h3040   ) begin
+            src_channel = 6'b001000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 5;
     end
 
     // ( 0x3048 .. 0x3050 )
-    if ( {address[RG:PAD5],{PAD5{1'b0}}} == 14'h3048   ) begin
+    if ( {address[RG:PAD3],{PAD3{1'b0}}} == 14'h3048   ) begin
+            src_channel = 6'b000100;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
+    end
+
+    // ( 0x3050 .. 0x3058 )
+    if ( {address[RG:PAD4],{PAD4{1'b0}}} == 14'h3050   ) begin
+            src_channel = 6'b000010;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
+    end
+
+    // ( 0x3058 .. 0x3060 )
+    if ( {address[RG:PAD5],{PAD5{1'b0}}} == 14'h3058   ) begin
             src_channel = 6'b000001;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
     end
 
 end

@@ -1,5 +1,5 @@
 Flow report for problema3
-Thu Sep 12 09:20:57 2019
+Thu Sep 12 13:27:35 2019
 Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Lite Edition
 
 
@@ -41,20 +41,20 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu Sep 12 09:20:52 2019       ;
+; Flow Status                        ; Successful - Thu Sep 12 13:27:31 2019       ;
 ; Quartus Prime Version              ; 16.1.2 Build 203 01/18/2017 SJ Lite Edition ;
 ; Revision Name                      ; problema3                                   ;
 ; Top-level Entity Name              ; problema3                                   ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 3,166 / 6,272 ( 50 % )                      ;
-;     Total combinational functions  ; 3,012 / 6,272 ( 48 % )                      ;
-;     Dedicated logic registers      ; 1,465 / 6,272 ( 23 % )                      ;
-; Total registers                    ; 1465                                        ;
-; Total pins                         ; 26 / 92 ( 28 % )                            ;
+; Total logic elements               ; 3,573 / 6,272 ( 57 % )                      ;
+;     Total combinational functions  ; 3,430 / 6,272 ( 55 % )                      ;
+;     Dedicated logic registers      ; 1,605 / 6,272 ( 26 % )                      ;
+; Total registers                    ; 1605                                        ;
+; Total pins                         ; 14 / 92 ( 15 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 80,896 / 276,480 ( 29 % )                   ;
+; Total memory bits                  ; 82,944 / 276,480 ( 30 % )                   ;
 ; Embedded Multiplier 9-bit elements ; 0 / 30 ( 0 % )                              ;
 ; Total PLLs                         ; 0 / 2 ( 0 % )                               ;
 +------------------------------------+---------------------------------------------+
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/12/2019 09:19:55 ;
+; Start date & time ; 09/12/2019 13:26:32 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; problema3           ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ agreement for further details.
 +-------------------------------------+--------------------------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+--------------------------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 93181009264021.156829079524412                         ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 93181009264021.156830559240608                         ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                      ; --            ; --          ; --         ;
 ; MISC_FILE                           ; arqt/synthesis/../arqt.cmp                             ; --            ; --          ; --         ;
@@ -93,7 +93,7 @@ agreement for further details.
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                                           ; --            ; --          ; --         ;
 ; SLD_FILE                            ; arqt/synthesis/arqt.regmap                             ; --            ; --          ; --         ;
 ; SLD_FILE                            ; arqt/synthesis/arqt.debuginfo                          ; --            ; --          ; --         ;
-; SLD_INFO                            ; QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1568290773 ; --            ; arqt        ; --         ;
+; SLD_INFO                            ; QSYS_NAME arqt HAS_SOPCINFO 1 GENERATION_ID 1568305563 ; --            ; arqt        ; --         ;
 ; SOPCINFO_FILE                       ; arqt/synthesis/../../arqt.sopcinfo                     ; --            ; --          ; --         ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                     ; --            ; --          ; --         ;
 +-------------------------------------+--------------------------------------------------------+---------------+-------------+------------+
@@ -104,11 +104,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:40     ; 1.0                     ; 4911 MB             ; 00:01:02                           ;
-; Fitter                    ; 00:00:10     ; 1.1                     ; 5545 MB             ; 00:00:14                           ;
-; Assembler                 ; 00:00:01     ; 1.0                     ; 4686 MB             ; 00:00:01                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.2                     ; 4794 MB             ; 00:00:04                           ;
-; Total                     ; 00:00:55     ; --                      ; --                  ; 00:01:21                           ;
+; Analysis & Synthesis      ; 00:00:39     ; 1.0                     ; 4915 MB             ; 00:01:01                           ;
+; Fitter                    ; 00:00:12     ; 1.1                     ; 5549 MB             ; 00:00:14                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 4687 MB             ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.2                     ; 4806 MB             ; 00:00:04                           ;
+; Total                     ; 00:00:56     ; --                      ; --                  ; 00:01:21                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

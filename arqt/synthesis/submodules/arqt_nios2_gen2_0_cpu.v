@@ -2095,9 +2095,9 @@ wire             write_strobe;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          oci_ienable <= 32'b00000000000000000000000000000111;
+          oci_ienable <= 32'b00000000000000000000000000001111;
       else if (take_action_oci_intr_mask_reg)
-          oci_ienable <= writedata | ~(32'b00000000000000000000000000000111);
+          oci_ienable <= writedata | ~(32'b00000000000000000000000000001111);
     end
 
 
@@ -3052,7 +3052,6 @@ wire             D_op_initi;
 wire             D_op_intr;
 wire             D_op_jmp;
 wire             D_op_jmpi;
-wire             D_op_lcd_0;
 wire             D_op_ldb;
 wire             D_op_ldbio;
 wire             D_op_ldbu;
@@ -3269,7 +3268,6 @@ wire             F_op_initi;
 wire             F_op_intr;
 wire             F_op_jmp;
 wire             F_op_jmpi;
-wire             F_op_lcd_0;
 wire             F_op_ldb;
 wire             F_op_ldbio;
 wire             F_op_ldbu;
@@ -3571,7 +3569,6 @@ reg              wait_for_one_post_bret_inst;
   arqt_nios2_gen2_0_cpu_test_bench the_arqt_nios2_gen2_0_cpu_test_bench
     (
       .D_iw                          (D_iw),
-      .D_iw_custom_n                 (D_iw_custom_n),
       .D_iw_op                       (D_iw_op),
       .D_iw_opx                      (D_iw_opx),
       .D_valid                       (D_valid),
@@ -3778,8 +3775,7 @@ reg              wait_for_one_post_bret_inst;
   assign F_op_intr = (F_iw_opx == 61) & F_is_opx_inst;
   assign F_op_crst = (F_iw_opx == 62) & F_is_opx_inst;
   assign F_op_opx_rsv63 = (F_iw_opx == 63) & F_is_opx_inst;
-  assign F_op_lcd_0 = F_op_custom & ({F_iw_custom_n[0]} == 1'h0);
-  assign F_op_vga_0 = F_op_custom & ({F_iw_custom_n[0]} == 1'h1);
+  assign F_op_vga_0 = F_op_custom & 1'b1;
   assign F_is_opx_inst = F_iw_op == 58;
   assign D_op_call = D_iw_op == 0;
   assign D_op_jmpi = D_iw_op == 1;
@@ -3908,8 +3904,7 @@ reg              wait_for_one_post_bret_inst;
   assign D_op_intr = (D_iw_opx == 61) & D_is_opx_inst;
   assign D_op_crst = (D_iw_opx == 62) & D_is_opx_inst;
   assign D_op_opx_rsv63 = (D_iw_opx == 63) & D_is_opx_inst;
-  assign D_op_lcd_0 = D_op_custom & ({D_iw_custom_n[0]} == 1'h0);
-  assign D_op_vga_0 = D_op_custom & ({D_iw_custom_n[0]} == 1'h1);
+  assign D_op_vga_0 = D_op_custom & 1'b1;
   assign D_is_opx_inst = D_iw_op == 58;
   assign R_en = 1'b1;
   assign E_ci_dataa = E_src1;
@@ -3928,7 +3923,7 @@ reg              wait_for_one_post_bret_inst;
   assign E_ci_multi_reset = ~reset_n;
   assign E_ci_multi_reset_req = reset_req;
   //custom_instruction_master, which is an e_custom_instruction_master
-  assign iactive = irq[31 : 0] & 32'b00000000000000000000000000000111;
+  assign iactive = irq[31 : 0] & 32'b00000000000000000000000000001111;
   assign F_pc_sel_nxt = (R_ctrl_exception | W_rf_ecc_unrecoverable_valid) ? 2'b00 :
     R_ctrl_break                              ? 2'b01 :
     (W_br_taken | R_ctrl_uncond_cti_non_br)   ? 2'b10 :
@@ -4617,9 +4612,9 @@ defparam arqt_nios2_gen2_0_cpu_register_bank_b.lpm_file = "arqt_nios2_gen2_0_cpu
 
   assign W_bstatus_reg_nxt = E_valid ? W_bstatus_reg_inst_nxt : W_bstatus_reg;
   assign W_ienable_reg_nxt = ((E_wrctl_ienable & E_valid) ? 
-    E_src1[31 : 0] : W_ienable_reg) & 32'b00000000000000000000000000000111;
+    E_src1[31 : 0] : W_ienable_reg) & 32'b00000000000000000000000000001111;
 
-  assign W_ipending_reg_nxt = iactive & W_ienable_reg & oci_ienable & 32'b00000000000000000000000000000111;
+  assign W_ipending_reg_nxt = iactive & W_ienable_reg & oci_ienable & 32'b00000000000000000000000000001111;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -4672,7 +4667,7 @@ defparam arqt_nios2_gen2_0_cpu_register_bank_b.lpm_file = "arqt_nios2_gen2_0_cpu
   //debug_mem_slave, which is an e_avalon_slave
   assign debug_mem_slave_clk = clk;
   assign debug_mem_slave_reset = ~reset_n;
-  assign D_ctrl_custom = D_op_lcd_0|D_op_vga_0;
+  assign D_ctrl_custom = D_op_vga_0;
   assign R_ctrl_custom_nxt = D_ctrl_custom;
   always @(posedge clk or negedge reset_n)
     begin
@@ -4683,7 +4678,7 @@ defparam arqt_nios2_gen2_0_cpu_register_bank_b.lpm_file = "arqt_nios2_gen2_0_cpu
     end
 
 
-  assign D_ctrl_custom_multi = D_op_lcd_0|D_op_vga_0;
+  assign D_ctrl_custom_multi = D_op_vga_0;
   assign R_ctrl_custom_multi_nxt = D_ctrl_custom_multi;
   always @(posedge clk or negedge reset_n)
     begin
@@ -5648,7 +5643,6 @@ defparam arqt_nios2_gen2_0_cpu_register_bank_b.lpm_file = "arqt_nios2_gen2_0_cpu
     (F_op_srai)? 56'h20202073726169 :
     (F_op_sra)? 56'h20202020737261 :
     (F_op_intr)? 56'h202020696e7472 :
-    (F_op_lcd_0)? 56'h20206c63645f30 :
     (F_op_vga_0)? 56'h20207667615f30 :
     56'h20202020424144;
 
@@ -5739,7 +5733,6 @@ defparam arqt_nios2_gen2_0_cpu_register_bank_b.lpm_file = "arqt_nios2_gen2_0_cpu
     (D_op_srai)? 56'h20202073726169 :
     (D_op_sra)? 56'h20202020737261 :
     (D_op_intr)? 56'h202020696e7472 :
-    (D_op_lcd_0)? 56'h20206c63645f30 :
     (D_op_vga_0)? 56'h20207667615f30 :
     56'h20202020424144;
 

@@ -7,8 +7,6 @@ module printBall(
     input wire [8:0] pos_yBarra1,                                         // Indica a posição atual da barra 1 no eixo y
     input wire [8:0] pos_yBarra2,                                         // Indica a posição atual da barra 2 no eixo y
     input wire enablePong,
-    output wire [23:0] placarWrite,                                        // Placar a ser escrito na LCD
-    output wire enPlacar,                                                  // Informa se o placar deve ser printado ou não
     output reg [3:0] pointPlayers,                                        // Indica se o player 1 pontuou (1) ou não (0)
     output reg color                                                      // Indica se está imprimindo ou não (1 imprimindo, 0 não)
 );
@@ -16,7 +14,7 @@ module printBall(
 // Bolinha: 8x8
 // Barra: 10x90
 // Meio da tela pra bola = 236
-reg [8:0] y_bola = 188;                                                   // Posição inicial da bola em y
+reg [8:0] y_bola = 236;                                                   // Posição inicial da bola em y
 reg [9:0] x_bola = 316;                                                   // Posição inicial da bola em x
 reg [15:0] delay = 0;                                                     // Tempo que deve ser esperado até atualizar as coordenadas
 reg startDelay = 1;                                                       // Sinal que indica se o delay deve ser iniciado
@@ -32,14 +30,6 @@ reg [1:0] pontuacaoJogador1 = 0;
 reg [1:0] pontuacaoJogador2 = 0;
 wire [1:0] random_Y;
 wire [12:0] random_Pos;
-reg [7:0] binJogador1 = 8'b00110000;
-reg [7:0] binJogador2 = 8'b00110000;
-reg [1:0] contar = 0;
-reg [23:0] placarWriteAux = {8'b00110000, 8'b00101100, 8'b00110000};
-reg enPlacarAux = 0;
-
-assign placarWrite[23:0] = placarWriteAux[23:0];
-assign enPlacar = enPlacarAux;
 
  LFSR randValue (
     .clock(clk_in),
@@ -50,30 +40,12 @@ assign enPlacar = enPlacarAux;
 
 always @(posedge clk_in) begin                                            // A cada pulso de clock
   if(i_rst || pontuacaoJogador1 == 3 || pontuacaoJogador2 == 3) begin
-    pontuacaoJogador1 <= 0;
-    pontuacaoJogador2 <= 0;
-    y_bola = 188;
-    x_bola = 316;
-  end
-  case(pontuacaoJogador1)
-    1: binJogador1[7:0] <= 8'b00110001;
-    2: binJogador1[7:0] <= 8'b00110010;
-    3: binJogador1[7:0] <= 8'b00110011;
-    default: binJogador1[7:0] <= 8'b00110000;
-  endcase
-  case(pontuacaoJogador2)
-    1: binJogador2[7:0] <= 8'b00110001;
-    2: binJogador2[7:0] <= 8'b00110010;
-    3: binJogador2[7:0] <= 8'b00110011;
-    default: binJogador2[7:0] <= 8'b00110000;
-  endcase
-  placarWriteAux[23:0] <= {binJogador2, 8'b00101100, binJogador1};
-  if(enPlacarAux == 1) begin
-    if(contar == 2) begin
-      contar <= 0;
-      enPlacarAux <= 0;
+    if(i_rst) begin
+      pontuacaoJogador1 <= 0;
+      pontuacaoJogador2 <= 0;
     end
-    else contar <= contar + 1;
+    y_bola = 236;
+    x_bola = 316;
   end
   if(enablePong == 1) begin
     if(startDelay) begin                                                  // Verifica se o controlador do delay está ativado
@@ -89,12 +61,14 @@ always @(posedge clk_in) begin                                            // A c
       if(x_bola >= 631) begin                                             // Verifica se bateu no fim da tela no eixo x
         direcao = ~direcao;                                               // Inverte a direção da bola para esquerda
         pontuacaoJogador1 <= pontuacaoJogador1 + 1;                       // Incrementa pontuação do jogador 1
-        enPlacarAux <= 1;                                                // Ativa bit indicador de pontuação de player 1
+        y_bola = 236;
+        x_bola = 316;
       end
       else if(x_bola <= 1) begin                                          // Verifica se bateu no início da tela no eixo x
         direcao = ~direcao;                                               // Inverte a direção da bola para direita
         pontuacaoJogador2 <= pontuacaoJogador2 + 1;                       // Incrementa pontuação do jogador 2
-        enPlacarAux <= 1;                                                // Ativa bit indicador de pontuação de player 2
+        y_bola = 236;
+        x_bola = 316;
       end
 
       if(y_bola <= 2) upDown = 0;                                         // Caso esteja no início da tela no eixo y, muda direção para baixo
@@ -103,7 +77,7 @@ always @(posedge clk_in) begin                                            // A c
       // Verifica se o eixo x e y da bola se encontra na barra 1
       if(x_bola >= pos_xBarra1 && x_bola <= (pos_xBarra1+10) && (y_bola + 8) >= pos_yBarra1 && (y_bola) <= (pos_yBarra1 + 90) ) begin
         direcao = 0;                                                      // Direção = direita
-        upDown = random_Pos[2];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
+        upDown = ((random_Pos[2] + random_Pos[1]) - (random_Pos[0])) * (random_Pos[4]); // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
         // Caso bola colida com a parte 1 ou 3 da barra
         if((y_bola + 8) >= pos_yBarra1 && (y_bola) <= (pos_yBarra1 + 30) || (y_bola + 8) >= (pos_yBarra1 + 60) && (y_bola) <= (pos_yBarra1 + 90))
           aleatory = 1;                                                   // Indica que a bola deve retornar aleatoriamente
@@ -114,7 +88,7 @@ always @(posedge clk_in) begin                                            // A c
       // Verifica se o eixo x e y da bola se encontra na barra 2
       if(x_bola >= (pos_xBarra2-10) && x_bola <= (pos_xBarra2) && (y_bola + 8) >= pos_yBarra2 && (y_bola) <= (pos_yBarra2 + 90) ) begin
         direcao = 1;                                                      // Direção = esquerda
-        upDown = random_Pos[4];                                           // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
+        upDown = ((random_Pos[0] + random_Pos[3]) - (random_Pos[1])) * (random_Pos[2]);                                          // Caso seja 0, bola vai para baixo. Caso 1, bola vai p cima
         // Caso bola colida com a parte 1 ou 3 da barra
         if((y_bola + 8) >= pos_yBarra2 && (y_bola) <= (pos_yBarra2 + 30) || (y_bola + 8) >= (pos_yBarra2 + 60) && (y_bola) <= (pos_yBarra2 + 90))
           aleatory = 1;                                                   // Indica que a bola deve retornar aleatoriamente

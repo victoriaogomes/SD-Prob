@@ -2,12 +2,8 @@ Info: Starting: Create block symbol file (.bsf)
 Info: qsys-generate D:\victo\Documents\GitHub\SD-Prob3\arqt.qsys --block-symbol-file --output-directory=D:\victo\Documents\GitHub\SD-Prob3\arqt --family="Cyclone IV E" --part=EP4CE6E22C8
 Progress: Loading SD-Prob3/arqt.qsys
 Progress: Reading input file
-Progress: Adding LCD_0 [LCD 1.0]
-Progress: Parameterizing module LCD_0
 Progress: Adding VGA_0 [VGA 1.0]
 Progress: Parameterizing module VGA_0
-Progress: Adding buttons [altera_avalon_pio 16.1]
-Progress: Parameterizing module buttons
 Progress: Adding clk_0 [clock_source 16.1]
 Progress: Parameterizing module clk_0
 Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 16.1]
@@ -20,11 +16,12 @@ Progress: Adding rs232_0 [altera_up_avalon_rs232 16.1]
 Progress: Parameterizing module rs232_0
 Progress: Adding rs232_1 [altera_up_avalon_rs232 16.1]
 Progress: Parameterizing module rs232_1
+Progress: Adding rs232_2 [altera_up_avalon_rs232 16.1]
+Progress: Parameterizing module rs232_2
 Progress: Building connections
 Progress: Parameterizing connections
 Progress: Validating
 Progress: Done reading input file
-Info: arqt.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
 Info: arqt.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
 Info: qsys-generate succeeded.
 Info: Finished: Create block symbol file (.bsf)
@@ -33,12 +30,8 @@ Info: Starting: Create HDL design files for synthesis
 Info: qsys-generate D:\victo\Documents\GitHub\SD-Prob3\arqt.qsys --synthesis=VERILOG --output-directory=D:\victo\Documents\GitHub\SD-Prob3\arqt\synthesis --family="Cyclone IV E" --part=EP4CE6E22C8
 Progress: Loading SD-Prob3/arqt.qsys
 Progress: Reading input file
-Progress: Adding LCD_0 [LCD 1.0]
-Progress: Parameterizing module LCD_0
 Progress: Adding VGA_0 [VGA 1.0]
 Progress: Parameterizing module VGA_0
-Progress: Adding buttons [altera_avalon_pio 16.1]
-Progress: Parameterizing module buttons
 Progress: Adding clk_0 [clock_source 16.1]
 Progress: Parameterizing module clk_0
 Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 16.1]
@@ -51,30 +44,24 @@ Progress: Adding rs232_0 [altera_up_avalon_rs232 16.1]
 Progress: Parameterizing module rs232_0
 Progress: Adding rs232_1 [altera_up_avalon_rs232 16.1]
 Progress: Parameterizing module rs232_1
+Progress: Adding rs232_2 [altera_up_avalon_rs232 16.1]
+Progress: Parameterizing module rs232_2
 Progress: Building connections
 Progress: Parameterizing connections
 Progress: Validating
 Progress: Done reading input file
-Info: arqt.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
 Info: arqt.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
 Info: arqt: Generating arqt "arqt" for QUARTUS_SYNTH
 Warning: arqt: "No matching role found for nios2_gen2_0_custom_instruction_master_multi_xconnect:ci_slave:ci_slave_ipending (ipending)"
 Warning: arqt: "No matching role found for nios2_gen2_0_custom_instruction_master_multi_xconnect:ci_slave:ci_slave_estatus (estatus)"
-Warning: arqt: "No matching role found for nios2_gen2_0_custom_instruction_master_multi_slave_translator0:ci_master:ci_master_result (result)"
 Warning: arqt: "No matching role found for nios2_gen2_0_custom_instruction_master_multi_slave_translator0:ci_master:ci_master_reset (reset)"
-Warning: arqt: "No matching role found for nios2_gen2_0_custom_instruction_master_multi_slave_translator1:ci_master:ci_master_reset (reset)"
-Info: LCD_0: "arqt" instantiated LCD "LCD_0"
 Info: VGA_0: "arqt" instantiated VGA "VGA_0"
-Info: buttons: Starting RTL generation for module 'arqt_buttons'
-Info: buttons:   Generation command is [exec D:/intelfpga_lite/16.1/quartus/bin64/perl/bin/perl.exe -I D:/intelfpga_lite/16.1/quartus/bin64/perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/common -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=arqt_buttons --dir=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0173_buttons_gen/ --quartus_dir=D:/intelfpga_lite/16.1/quartus --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0173_buttons_gen//arqt_buttons_component_configuration.pl  --do_build_sim=0  ]
-Info: buttons: Done RTL generation for module 'arqt_buttons'
-Info: buttons: "arqt" instantiated altera_avalon_pio "buttons"
 Info: jtag_uart_0: Starting RTL generation for module 'arqt_jtag_uart_0'
-Info: jtag_uart_0:   Generation command is [exec D:/intelfpga_lite/16.1/quartus/bin64/perl/bin/perl.exe -I D:/intelfpga_lite/16.1/quartus/bin64/perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/common -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=arqt_jtag_uart_0 --dir=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0174_jtag_uart_0_gen/ --quartus_dir=D:/intelfpga_lite/16.1/quartus --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0174_jtag_uart_0_gen//arqt_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart_0:   Generation command is [exec D:/intelfpga_lite/16.1/quartus/bin64/perl/bin/perl.exe -I D:/intelfpga_lite/16.1/quartus/bin64/perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/common -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=arqt_jtag_uart_0 --dir=C:/Users/victo/AppData/Local/Temp/alt8151_5275818024581938857.dir/0445_jtag_uart_0_gen/ --quartus_dir=D:/intelfpga_lite/16.1/quartus --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_5275818024581938857.dir/0445_jtag_uart_0_gen//arqt_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart_0: Done RTL generation for module 'arqt_jtag_uart_0'
 Info: jtag_uart_0: "arqt" instantiated altera_avalon_jtag_uart "jtag_uart_0"
 Info: memoria: Starting RTL generation for module 'arqt_memoria'
-Info: memoria:   Generation command is [exec D:/intelfpga_lite/16.1/quartus/bin64/perl/bin/perl.exe -I D:/intelfpga_lite/16.1/quartus/bin64/perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/common -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=arqt_memoria --dir=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0175_memoria_gen/ --quartus_dir=D:/intelfpga_lite/16.1/quartus --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0175_memoria_gen//arqt_memoria_component_configuration.pl  --do_build_sim=0  ]
+Info: memoria:   Generation command is [exec D:/intelfpga_lite/16.1/quartus/bin64/perl/bin/perl.exe -I D:/intelfpga_lite/16.1/quartus/bin64/perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/common -I D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- D:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=arqt_memoria --dir=C:/Users/victo/AppData/Local/Temp/alt8151_5275818024581938857.dir/0446_memoria_gen/ --quartus_dir=D:/intelfpga_lite/16.1/quartus --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_5275818024581938857.dir/0446_memoria_gen//arqt_memoria_component_configuration.pl  --do_build_sim=0  ]
 Info: memoria: Done RTL generation for module 'arqt_memoria'
 Info: memoria: "arqt" instantiated altera_avalon_onchip_memory2 "memoria"
 Info: nios2_gen2_0: "arqt" instantiated altera_nios2_gen2 "nios2_gen2_0"
@@ -93,19 +80,19 @@ Info: mm_interconnect_0: "arqt" instantiated altera_mm_interconnect "mm_intercon
 Info: irq_mapper: "arqt" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "arqt" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'arqt_nios2_gen2_0_cpu'
-Info: cpu:   Generation command is [exec D:/intelFPGA_lite/16.1/quartus/bin64//eperlcmd.exe -I D:/intelFPGA_lite/16.1/quartus/bin64//perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=arqt_nios2_gen2_0_cpu --dir=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0182_cpu_gen/ --quartus_bindir=D:/intelFPGA_lite/16.1/quartus/bin64/ --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_431322106824295059.dir/0182_cpu_gen//arqt_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2019.09.12 09:14:52 (*) Starting Nios II generation
-Info: cpu: # 2019.09.12 09:14:52 (*)   Checking for plaintext license.
-Info: cpu: # 2019.09.12 09:14:53 (*)   Couldn't query license setup in Quartus directory D:/intelFPGA_lite/16.1/quartus/bin64/
-Info: cpu: # 2019.09.12 09:14:53 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
-Info: cpu: # 2019.09.12 09:14:53 (*)   LM_LICENSE_FILE environment variable is empty
-Info: cpu: # 2019.09.12 09:14:53 (*)   Plaintext license not found.
-Info: cpu: # 2019.09.12 09:14:53 (*)   No license required to generate encrypted Nios II/e.
-Info: cpu: # 2019.09.12 09:14:53 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2019.09.12 09:14:53 (*)   Creating all objects for CPU
-Info: cpu: # 2019.09.12 09:14:54 (*)   Generating RTL from CPU objects
-Info: cpu: # 2019.09.12 09:14:54 (*)   Creating plain-text RTL
-Info: cpu: # 2019.09.12 09:14:54 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec D:/intelFPGA_lite/16.1/quartus/bin64//eperlcmd.exe -I D:/intelFPGA_lite/16.1/quartus/bin64//perl/lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I D:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- D:/intelfpga_lite/16.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=arqt_nios2_gen2_0_cpu --dir=C:/Users/victo/AppData/Local/Temp/alt8151_5275818024581938857.dir/0453_cpu_gen/ --quartus_bindir=D:/intelFPGA_lite/16.1/quartus/bin64/ --verilog --config=C:/Users/victo/AppData/Local/Temp/alt8151_5275818024581938857.dir/0453_cpu_gen//arqt_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2019.09.12 13:23:24 (*) Starting Nios II generation
+Info: cpu: # 2019.09.12 13:23:24 (*)   Checking for plaintext license.
+Info: cpu: # 2019.09.12 13:23:25 (*)   Couldn't query license setup in Quartus directory D:/intelFPGA_lite/16.1/quartus/bin64/
+Info: cpu: # 2019.09.12 13:23:25 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: cpu: # 2019.09.12 13:23:25 (*)   LM_LICENSE_FILE environment variable is empty
+Info: cpu: # 2019.09.12 13:23:25 (*)   Plaintext license not found.
+Info: cpu: # 2019.09.12 13:23:25 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2019.09.12 13:23:25 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2019.09.12 13:23:25 (*)   Creating all objects for CPU
+Info: cpu: # 2019.09.12 13:23:26 (*)   Generating RTL from CPU objects
+Info: cpu: # 2019.09.12 13:23:26 (*)   Creating plain-text RTL
+Info: cpu: # 2019.09.12 13:23:27 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'arqt_nios2_gen2_0_cpu'
 Info: cpu: "nios2_gen2_0" instantiated altera_nios2_gen2_unit "cpu"
 Info: nios2_gen2_0_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "nios2_gen2_0_data_master_translator"
@@ -122,6 +109,6 @@ Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_m
 Info: Reusing file D:/victo/Documents/GitHub/SD-Prob3/arqt/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
-Info: arqt: Done "arqt" with 28 modules, 49 files
+Info: arqt: Done "arqt" with 26 modules, 47 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis
