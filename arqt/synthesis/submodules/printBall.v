@@ -7,6 +7,8 @@ module printBall(
     input wire [8:0] pos_yBarra1,                                         // Indica a posição atual da barra 1 no eixo y
     input wire [8:0] pos_yBarra2,                                         // Indica a posição atual da barra 2 no eixo y
     input wire enablePong,
+    output wire [23:0] placarWrite,                                        // Placar a ser escrito na LCD
+    output wire enPlacar,                                                  // Informa se o placar deve ser printado ou não
     output reg [3:0] pointPlayers,                                        // Indica se o player 1 pontuou (1) ou não (0)
     output reg color                                                      // Indica se está imprimindo ou não (1 imprimindo, 0 não)
 );
@@ -30,6 +32,14 @@ reg [1:0] pontuacaoJogador1 = 0;
 reg [1:0] pontuacaoJogador2 = 0;
 wire [1:0] random_Y;
 wire [12:0] random_Pos;
+reg [7:0] binJogador1 = 8'b00110000;
+reg [7:0] binJogador2 = 8'b00110000;
+reg [1:0] contar = 0;
+reg [23:0] placarWriteAux = {8'b00110000, 8'b00101100, 8'b00110000};
+reg enPlacarAux = 0;
+
+assign placarWrite[23:0] = placarWriteAux[23:0];
+assign enPlacar = enPlacarAux;
 
  LFSR randValue (
     .clock(clk_in),
@@ -45,6 +55,26 @@ always @(posedge clk_in) begin                                            // A c
     y_bola = 188;
     x_bola = 316;
   end
+  case(pontuacaoJogador1)
+    1: binJogador1[7:0] <= 8'b00110001;
+    2: binJogador1[7:0] <= 8'b00110010;
+    3: binJogador1[7:0] <= 8'b00110011;
+    default: binJogador1[7:0] <= 8'b00110000;
+  endcase
+  case(pontuacaoJogador2)
+    1: binJogador2[7:0] <= 8'b00110001;
+    2: binJogador2[7:0] <= 8'b00110010;
+    3: binJogador2[7:0] <= 8'b00110011;
+    default: binJogador2[7:0] <= 8'b00110000;
+  endcase
+  placarWriteAux[23:0] <= {binJogador2, 8'b00101100, binJogador1};
+  if(enPlacarAux == 1) begin
+    if(contar == 2) begin
+      contar <= 0;
+      enPlacarAux <= 0;
+    end
+    else contar <= contar + 1;
+  end
   if(enablePong == 1) begin
     if(startDelay) begin                                                  // Verifica se o controlador do delay está ativado
       if(delay == 16'hFFFF) begin                                         // Verifica se o delay já chegou ao final
@@ -58,11 +88,13 @@ always @(posedge clk_in) begin                                            // A c
 
       if(x_bola >= 631) begin                                             // Verifica se bateu no fim da tela no eixo x
         direcao = ~direcao;                                               // Inverte a direção da bola para esquerda
-        pontuacaoJogador1 <= pontuacaoJogador1 + 1;                        // Ativa bit indicador de pontuação de player 1
+        pontuacaoJogador1 <= pontuacaoJogador1 + 1;                       // Incrementa pontuação do jogador 1
+        enPlacarAux <= 1;                                                // Ativa bit indicador de pontuação de player 1
       end
       else if(x_bola <= 1) begin                                          // Verifica se bateu no início da tela no eixo x
         direcao = ~direcao;                                               // Inverte a direção da bola para direita
-        pontuacaoJogador2 <= pontuacaoJogador2 + 1;                        // Ativa bit indicador de pontuação de player 2
+        pontuacaoJogador2 <= pontuacaoJogador2 + 1;                       // Incrementa pontuação do jogador 2
+        enPlacarAux <= 1;                                                // Ativa bit indicador de pontuação de player 2
       end
 
       if(y_bola <= 2) upDown = 0;                                         // Caso esteja no início da tela no eixo y, muda direção para baixo

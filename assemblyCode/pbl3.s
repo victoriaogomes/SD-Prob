@@ -73,6 +73,10 @@ initialize_lcd:
 	call delay_0_053ms # Delay de 0.53ms
 	movia r17, 0x1 # Mudando PINRS para envio de dados
 	call delay_4_1ms # Delay de 4.1ms
+	movia r16, 0x58
+	call delay_4_1ms
+	custom 0, r23, r17, r16 # Envia dado armazenado em R16 para ser escrito
+	call delay_0_053ms # Delay de 0.053ms
 	ldw r31, 0(r27) # Colocando o endereço para o qual deve voltar no registrador r31
 	addi r27, r27, 4 # Desalocando espaço na pilha
 	ret # Retorna para a rotina que chamou essa label

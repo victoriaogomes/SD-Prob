@@ -92,7 +92,7 @@ altera_reserved_tdo          : 20        : output : 2.5 V             :         
 nCE                          : 21        :        :                   :         : 1         :                
 GND                          : 22        : gnd    :                   :         :           :                
 clock                        : 23        : input  : 2.5 V             :         : 1         : Y              
-GND+                         : 24        :        :                   :         : 2         :                
+reset2                       : 24        : input  : 2.5 V             :         : 2         : N              
 reset                        : 25        : input  : 2.5 V             :         : 2         : Y              
 VCCIO2                       : 26        : power  :                   : 2.5V    : 2         :                
 GND                          : 27        : gnd    :                   :         :           :                

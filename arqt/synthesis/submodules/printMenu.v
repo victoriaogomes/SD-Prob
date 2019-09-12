@@ -107,73 +107,73 @@ always @(*) begin
 
 // Letra P
     //   Traço horizontal inferior
-    else if((o_y >= 415 && o_y <= 420 && o_x >= 195 && o_x <= 222)) cor = 1;
+//    else if((o_y >= 415 && o_y <= 420 && o_x >= 195 && o_x <= 222)) cor = 1;
     //   Traço vertical maior
-    else if(o_y >= 395 && o_y <= 440 && o_x >= 195 && o_x <= 200) cor = 1;
+//    else if(o_y >= 395 && o_y <= 440 && o_x >= 195 && o_x <= 200) cor = 1;
     //   Traço vertical menor
-    else if(o_y >= 395 && o_y <= 420 && o_x >= 217 && o_x <= 222) cor = 1;
+//    else if(o_y >= 395 && o_y <= 420 && o_x >= 217 && o_x <= 222) cor = 1;
     //   Traço horizontal superior
-    else if(o_y >= 395 && o_y <= 400 && o_x >= 195 && o_x <= 222) cor = 1;
+//    else if(o_y >= 395 && o_y <= 400 && o_x >= 195 && o_x <= 222) cor = 1;
 
 // Letra R
     //   Traço horizontal inferior
-    else if((o_y >= 420 && o_y <= 425 && o_x >= 232 && o_x <= 259)) cor = 1;
+//    else if((o_y >= 420 && o_y <= 425 && o_x >= 232 && o_x <= 259)) cor = 1;
     //   Traço vertical maior
-    else if(o_y >= 395 && o_y <= 440 && o_x >= 232 && o_x <= 237) cor = 1;
+//    else if(o_y >= 395 && o_y <= 440 && o_x >= 232 && o_x <= 237) cor = 1;
     //   Traço vertical menor
-    else if(o_y >= 395 && o_y <= 425 && o_x >= 254 && o_x <= 259) cor = 1;
+//    else if(o_y >= 395 && o_y <= 425 && o_x >= 254 && o_x <= 259) cor = 1;
     //   Traço horizontal superior
-    else if(o_y >= 395 && o_y <= 400 && o_x >= 232 && o_x <= 259) cor = 1;
+//    else if(o_y >= 395 && o_y <= 400 && o_x >= 232 && o_x <= 259) cor = 1;
     //   Traço inclinado: vai de y = 425 a y = 440 e de x = 244 até x = 259
-    else if(o_y >= 425 && o_y <= 426 && o_x >= 244 && o_x <= 249) cor = 1;
-    else if(o_y >= 426 && o_y <= 427 && o_x >= 245 && o_x <= 250) cor = 1;
-    else if(o_y >= 427 && o_y <= 428 && o_x >= 246 && o_x <= 251) cor = 1;
-    else if(o_y >= 428 && o_y <= 429 && o_x >= 247 && o_x <= 252) cor = 1;
-    else if(o_y >= 429 && o_y <= 430 && o_x >= 248 && o_x <= 253) cor = 1;
-    else if(o_y >= 430 && o_y <= 431 && o_x >= 249 && o_x <= 254) cor = 1;
-    else if(o_y >= 431 && o_y <= 432 && o_x >= 250 && o_x <= 255) cor = 1;
-    else if(o_y >= 432 && o_y <= 433 && o_x >= 251 && o_x <= 256) cor = 1;
-    else if(o_y >= 433 && o_y <= 434 && o_x >= 252 && o_x <= 257) cor = 1;
-    else if(o_y >= 434 && o_y <= 435 && o_x >= 253 && o_x <= 258) cor = 1;
-    else if(o_y >= 435 && o_y <= 436 && o_x >= 254 && o_x <= 259) cor = 1;
-    else if(o_y >= 436 && o_y <= 437 && o_x >= 255 && o_x <= 260) cor = 1;
-    else if(o_y >= 437 && o_y <= 438 && o_x >= 256 && o_x <= 261) cor = 1;
-    else if(o_y >= 438 && o_y <= 439 && o_x >= 257 && o_x <= 262) cor = 1;
-    else if(o_y >= 439 && o_y <= 440 && o_x >= 258 && o_x <= 263) cor = 1;
+//    else if(o_y >= 425 && o_y <= 426 && o_x >= 244 && o_x <= 249) cor = 1;
+//    else if(o_y >= 426 && o_y <= 427 && o_x >= 245 && o_x <= 250) cor = 1;
+//    else if(o_y >= 427 && o_y <= 428 && o_x >= 246 && o_x <= 251) cor = 1;
+//    else if(o_y >= 428 && o_y <= 429 && o_x >= 247 && o_x <= 252) cor = 1;
+//    else if(o_y >= 429 && o_y <= 430 && o_x >= 248 && o_x <= 253) cor = 1;
+//    else if(o_y >= 430 && o_y <= 431 && o_x >= 249 && o_x <= 254) cor = 1;
+//    else if(o_y >= 431 && o_y <= 432 && o_x >= 250 && o_x <= 255) cor = 1;
+//    else if(o_y >= 432 && o_y <= 433 && o_x >= 251 && o_x <= 256) cor = 1;
+//    else if(o_y >= 433 && o_y <= 434 && o_x >= 252 && o_x <= 257) cor = 1;
+//    else if(o_y >= 434 && o_y <= 435 && o_x >= 253 && o_x <= 258) cor = 1;
+//    else if(o_y >= 435 && o_y <= 436 && o_x >= 254 && o_x <= 259) cor = 1;
+//    else if(o_y >= 436 && o_y <= 437 && o_x >= 255 && o_x <= 260) cor = 1;
+//    else if(o_y >= 437 && o_y <= 438 && o_x >= 256 && o_x <= 261) cor = 1;
+//    else if(o_y >= 438 && o_y <= 439 && o_x >= 257 && o_x <= 262) cor = 1;
+//    else if(o_y >= 439 && o_y <= 440 && o_x >= 258 && o_x <= 263) cor = 1;
 
 // Letra E
     //   Traço horizontal inferior
-    else if((o_y >= 435 && o_y <= 440 && o_x >= 269 && o_x <= 296)) cor = 1;
+//    else if((o_y >= 435 && o_y <= 440 && o_x >= 269 && o_x <= 296)) cor = 1;
     //   Traço vertical maior
-    else if(o_y >= 395 && o_y <= 440 && o_x >= 269 && o_x <= 274) cor = 1;
+//    else if(o_y >= 395 && o_y <= 440 && o_x >= 269 && o_x <= 274) cor = 1;
     //   Traço horizontal superior
-    else if(o_y >= 395 && o_y <= 400 && o_x >= 269 && o_x <= 296) cor = 1;
+//    else if(o_y >= 395 && o_y <= 400 && o_x >= 269 && o_x <= 296) cor = 1;
     //   Traço do meio
-    else if(o_y >= 415 && o_y <= 420 && o_x >= 269 && o_x <= 296) cor = 1;
+//    else if(o_y >= 415 && o_y <= 420 && o_x >= 269 && o_x <= 296) cor = 1;
 
 // Letra S
     //   Traço horizontal superior
-    else if(o_y >= 395 && o_y <= 400 && o_x >= 306 && o_x <= 333) cor = 1;
+//    else if(o_y >= 395 && o_y <= 400 && o_x >= 306 && o_x <= 333) cor = 1;
     //   Primeiro traço vertical
-    else if(o_y >= 395 && o_y <= 415 && o_x >= 306 && o_x <= 311) cor = 1;
+//    else if(o_y >= 395 && o_y <= 415 && o_x >= 306 && o_x <= 311) cor = 1;
     //   Traço horizontal do meio
-    else if((o_y >= 410 && o_y <= 415 && o_x >= 306 && o_x <= 333)) cor = 1;
+//    else if((o_y >= 410 && o_y <= 415 && o_x >= 306 && o_x <= 333)) cor = 1;
     //   Segundo traço vertical
-    else if(o_y >= 410 && o_y <= 435 && o_x >= 328 && o_x <= 333) cor = 1;
+//    else if(o_y >= 410 && o_y <= 435 && o_x >= 328 && o_x <= 333) cor = 1;
     //   Traço horizontal inferior
-    else if(o_y >= 435 && o_y <= 440 && o_x >= 306 && o_x <= 333) cor = 1;
+//    else if(o_y >= 435 && o_y <= 440 && o_x >= 306 && o_x <= 333) cor = 1;
 
 // Letra S
     //   Traço horizontal superior
-    else if(o_y >= 395 && o_y <= 400 && o_x >= 343 && o_x <= 350) cor = 1;
+//    else if(o_y >= 395 && o_y <= 400 && o_x >= 343 && o_x <= 350) cor = 1;
     //   Primeiro traço vertical
-    else if(o_y >= 395 && o_y <= 415 && o_x >= 343 && o_x <= 348) cor = 1;
+//    else if(o_y >= 395 && o_y <= 415 && o_x >= 343 && o_x <= 348) cor = 1;
     //   Traço horizontal do meio
-    else if((o_y >= 410 && o_y <= 415 && o_x >= 343 && o_x <= 370)) cor = 1;
+//    else if((o_y >= 410 && o_y <= 415 && o_x >= 343 && o_x <= 370)) cor = 1;
     //   Segundo traço vertical
-    else if(o_y >= 410 && o_y <= 435 && o_x >= 365 && o_x <= 370) cor = 1;
+//    else if(o_y >= 410 && o_y <= 435 && o_x >= 365 && o_x <= 370) cor = 1;
     //   Traço horizontal inferior
-    else if(o_y >= 435 && o_y <= 440 && o_x >= 343 && o_x <= 370) cor = 1;
+//    else if(o_y >= 435 && o_y <= 440 && o_x >= 343 && o_x <= 370) cor = 1;
 
 // Letra S
     //   Traço horizontal superior

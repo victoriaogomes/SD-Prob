@@ -2,13 +2,16 @@ module top2(
     input wire CLK,               // Clock da placa
     input wire CLK_EN,            // Clock para habilitar a instrução customizada
     input wire [31:0] dataa,      // Entrada para envio de coordenadas de y da barra 1 e 2
+    input wire [31:0] datab,      // Entrada para ser utilizada pelo LCD
     input  wire resentinho,       // Botão de reset
     output wire [31:0] result,    // Output que irá fornecer a pontuação do jogador
     output wire VGA_HS_O,         // Output do sinal horizontal
     output wire VGA_VS_O,         // Output do sinal vertical
     output reg VGA_R,             // Output red da VGA de 1-bit
     output reg VGA_G,             // Output green da VGA de 1-bit
-    output reg VGA_B              // Output blue da VGA de 1-bit
+    output reg VGA_B,             // Output blue da VGA de 1-bit
+    output wire [23:0] placar,     // Placar a ser escrito na LCD
+    output wire enablePlacar       // Informa se o placar deve ser escrito ou não
     );
 
     wire [9:0] x;                 // Posição x atual do pixel: 10-bit value: 0-1023
@@ -50,9 +53,10 @@ module top2(
         .o_active(activeArea),    // Alto quando um pixel está sendo desenhado
         .o_x(x),                  // Posição x atual do pixel
         .o_y(y),                  // Posição y atual do pixel
-        .enablePong(enableGame),
+        .enablePong(enableGame),  // Indica se o jogo está rodando ou não
         .color(selectColors[0])   // Indica se está imprimindo ou não (1 imprimindo, 0 não)
     );
+
 
     printBar printBar_1 (
       .clk_in(pix_stb),           // Clock da FPGA
@@ -88,6 +92,8 @@ module top2(
         .o_active(activeArea),    // Indicador de área ativa
         .o_x(x),                  // Posição x atual do pixel
         .o_y(y),                  // Posição y atual do pixel
+        .placarWrite(placar),     // Placar a ser escrito na LCD
+        .enPlacar(enablePlacar),  // Informa se o placar deve ser printado ou não
         .pos_yBarra1(barra1Atual),// Posição y atual da barra 1
         .pos_yBarra2(barra2Atual),// Posição y atual da barra 2
         .enablePong(enableGame),  // Indica se o jogo está habilitado ou não
@@ -104,7 +110,7 @@ module top2(
 
     always @(posedge CLK_EN) begin
       if(enableGame == 1) begin
-        if(dataa[9] == 1) begin
+        if(dataa[9] == 0) begin
           yBar1 <= dataa[8:0];
           refreshBar1 <= 1;
           refreshBar2 <= 0;

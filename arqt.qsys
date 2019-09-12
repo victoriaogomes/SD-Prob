@@ -89,6 +89,14 @@
          type = "String";
       }
    }
+   element arqt
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element buttons
    {
       datum _sortIndex
@@ -220,10 +228,26 @@
    type="conduit"
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
+ <interface
+   name="enableplacar_receiver"
+   internal="LCD_0.enablePlacar"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="enableplacar_sender"
+   internal="VGA_0.enablePlacar"
+   type="conduit"
+   dir="end" />
  <interface name="lcd_display" internal="LCD_0.display" type="conduit" dir="end" />
  <interface name="lcd_enable" internal="LCD_0.enable" type="conduit" dir="end" />
  <interface name="lcd_rs" internal="LCD_0.rs" type="conduit" dir="end" />
  <interface name="lcd_rw" internal="LCD_0.rw" type="conduit" dir="end" />
+ <interface
+   name="placar_receiver"
+   internal="LCD_0.placar"
+   type="conduit"
+   dir="end" />
+ <interface name="placar_sender" internal="VGA_0.placar" type="conduit" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface name="reset_1" internal="VGA_0.conduit_end_1" />
  <interface name="reset_fpga" internal="VGA_0.conduit_end" />
