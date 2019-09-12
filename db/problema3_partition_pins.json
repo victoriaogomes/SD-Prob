@@ -76,10 +76,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "reset1",
-					"strict" : false
-				},
-				{
 					"name" : "buttons[0]",
 					"strict" : false
 				},
